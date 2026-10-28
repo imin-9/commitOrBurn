@@ -1,0 +1,54 @@
+# ==========================================
+# 1. Common
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE & Editors
+.vscode/
+.idea/
+
+# ==========================================
+# 2. Solidity (Foundry / Hardhat)
+# ==========================================
+# Compilation output & Cache
+/contracts/out/
+/contracts/cache/
+/contracts/artifacts/
+/contracts/typechain/
+/contracts/typechain-types/
+
+# Deployment records (Foundry)
+/contracts/broadcast/
+
+# Dependency coverage / reports
+/contracts/coverage/
+/contracts/coverage.json
+
+# ==========================================
+# 3. Next.js (Frontend)
+# ==========================================
+# Dependencies
+/frontend/node_modules/
+/frontend/.pnpm-debug.log*
+
+# Next.js Build Outputs
+/frontend/.next/
+/frontend/out/
+/frontend/build/
+/frontend/dist/
+
+# Vercel deployment folder
+/frontend/.vercel
+
+# Logs
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
