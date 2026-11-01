@@ -35,26 +35,45 @@ contract CommitOrBurnTest is Test {
         assertEq(roundInfo.endTime, block.timestamp + 14 days);
     }
 
+    function _assertDepositState(address user_, uint256 round_) internal view {
+        CommitOrBurn.User memory userInfo = engine.getUserInfo(user_);
+        CommitOrBurn.Round memory roundInfo = engine.getRoundInfo(round_);
+        string[] memory githubIds = engine.getUsersByRound(round_);
+
+        assertEq(userInfo.githubId, GITHUB_ID);
+        assertEq(userInfo.roundId, round_);
+        assertEq(userInfo.shares, DEPOSIT_AMOUNT / UNIT);
+        assertEq(roundInfo.totalDeposited, DEPOSIT_AMOUNT);
+        assertEq(githubIds[0], GITHUB_ID);
+    }
+
     /////////////////
     // function /////
     /////////////////
-    function testDepositSuccess() public {
-        uint256 currnetRound = engine.s_currentRound();
-
-        vm.expectEmit(true, true, true, true, address(engine));
-        emit Deposited(user, currnetRound, GITHUB_ID, DEPOSIT_AMOUNT / UNIT);
+    function testDepositSuccessBeforeRoundStarted() public {
+        uint256 round = engine.s_currentRound();
 
         vm.prank(user);
+        vm.expectEmit(true, true, true, true, address(engine));
+        emit Deposited(user, round, GITHUB_ID, DEPOSIT_AMOUNT / UNIT);
+
         engine.deposit{value: DEPOSIT_AMOUNT}(GITHUB_ID);
 
-        CommitOrBurn.User memory userInfo = engine.getUserInfo(user);
-        CommitOrBurn.Round memory roundInfo = engine.getRoundInfo(currnetRound);
+        _assertDepositState(user, round);
+    }
 
-        assertEq(userInfo.githubId, GITHUB_ID);
-        assertEq(userInfo.roundId, currnetRound);
-        assertEq(userInfo.shares, DEPOSIT_AMOUNT / UNIT);
+    function testDepositSuccessAfterRoundStarted() public {
+        uint256 round = engine.s_currentRound() + 1;
+        uint256 startTime = engine.getRoundInfo(engine.s_currentRound()).startTime;
 
-        assertEq(roundInfo.totalDeposited, DEPOSIT_AMOUNT);
+        vm.warp(startTime + 1);
+        vm.prank(user);
+        vm.expectEmit(true, true, true, true, address(engine));
+        emit Deposited(user, round, GITHUB_ID, DEPOSIT_AMOUNT / UNIT);
+
+        engine.deposit{value: DEPOSIT_AMOUNT}(GITHUB_ID);
+
+        _assertDepositState(user, round);
     }
 
     function testDepositRevertsWhenEnterSameRound() public {
