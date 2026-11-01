@@ -52,3 +52,9 @@ Thumbs.db
 /frontend/npm-debug.log*
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
+
+# ==========================================
+# 4. cre (chainlink)
+# ==========================================
+# Dependencies
+/cre-workflow/github-commit-check/node_modules/
