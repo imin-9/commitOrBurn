@@ -11,6 +11,7 @@ contract CommitOrBurn {
         uint256 startTime;
         uint256 endTime;
         uint256 totalDeposited;
+        uint256 totalShares;
         bool resolved;
     }
 
@@ -22,6 +23,7 @@ contract CommitOrBurn {
 
     mapping(uint256 => Round) private s_rounds;
     mapping(address => User) private s_users;
+    mapping(uint256 => address[]) private s_roundUserList;
 
     uint256 public constant UNIT = 0.001 ether;
     uint256 public s_currentRound;
@@ -37,8 +39,13 @@ contract CommitOrBurn {
 
     function deposit(string memory _githubId) external payable {
         User storage user = s_users[msg.sender];
+        uint256 round = s_currentRound;
 
-        if (user.roundId == s_currentRound) {
+        if (block.timestamp >= s_rounds[s_currentRound].startTime) {
+            round = s_currentRound + 1;
+        }
+
+        if (user.roundId == round) {
             revert CommitOrBurn__CantEnterSameRound();
         }
 
@@ -55,12 +62,15 @@ contract CommitOrBurn {
         }
 
         user.githubId = _githubId;
-        user.roundId = s_currentRound;
+        user.roundId = round;
         user.shares = msg.value / UNIT;
 
-        s_rounds[s_currentRound].totalDeposited += msg.value;
+        s_rounds[round].totalDeposited += msg.value;
+        s_rounds[round].totalShares += user.shares;
 
-        emit Deposited(msg.sender, s_currentRound, _githubId, user.shares);
+        s_roundUserList[round].push(msg.sender);
+
+        emit Deposited(msg.sender, round, _githubId, user.shares);
     }
 
     function getUserInfo(address _user) external view returns (User memory) {
