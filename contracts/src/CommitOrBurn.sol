@@ -73,6 +73,17 @@ contract CommitOrBurn {
         emit Deposited(msg.sender, round, _githubId, user.shares);
     }
 
+    function getUsersByRound(uint256 _roundId) external view returns (string[] memory) {
+        address[] memory userAddressList = s_roundUserList[_roundId];
+        string[] memory githubIds = new string[](userAddressList.length);
+
+        for (uint256 i = 0; i < userAddressList.length; i++) {
+            githubIds[i] = s_users[userAddressList[i]].githubId;
+        }
+
+        return githubIds;
+    }
+
     function getUserInfo(address _user) external view returns (User memory) {
         return s_users[_user];
     }
