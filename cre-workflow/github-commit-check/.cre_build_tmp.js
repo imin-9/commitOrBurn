@@ -5946,6 +5946,7 @@ var ListSchema = /* @__PURE__ */ messageDesc(file_values_v1_values, 3);
 var DecimalSchema = /* @__PURE__ */ messageDesc(file_values_v1_values, 4);
 var file_sdk_v1alpha_sdk = /* @__PURE__ */ fileDesc("ChVzZGsvdjFhbHBoYS9zZGsucHJvdG8SC3Nkay52MWFscGhhIrQBChVTaW1wbGVDb25zZW5zdXNJbnB1dHMSIQoFdmFsdWUYASABKAsyEC52YWx1ZXMudjEuVmFsdWVIABIPCgVlcnJvchgCIAEoCUgAEjUKC2Rlc2NyaXB0b3JzGAMgASgLMiAuc2RrLnYxYWxwaGEuQ29uc2Vuc3VzRGVzY3JpcHRvchIhCgdkZWZhdWx0GAQgASgLMhAudmFsdWVzLnYxLlZhbHVlQg0KC29ic2VydmF0aW9uIpABCglGaWVsZHNNYXASMgoGZmllbGRzGAEgAygLMiIuc2RrLnYxYWxwaGEuRmllbGRzTWFwLkZpZWxkc0VudHJ5Gk8KC0ZpZWxkc0VudHJ5EgsKA2tleRgBIAEoCRIvCgV2YWx1ZRgCIAEoCzIgLnNkay52MWFscGhhLkNvbnNlbnN1c0Rlc2NyaXB0b3I6AjgBIoYBChNDb25zZW5zdXNEZXNjcmlwdG9yEjMKC2FnZ3JlZ2F0aW9uGAEgASgOMhwuc2RrLnYxYWxwaGEuQWdncmVnYXRpb25UeXBlSAASLAoKZmllbGRzX21hcBgCIAEoCzIWLnNkay52MWFscGhhLkZpZWxkc01hcEgAQgwKCmRlc2NyaXB0b3IiagoNUmVwb3J0UmVxdWVzdBIXCg9lbmNvZGVkX3BheWxvYWQYASABKAwSFAoMZW5jb2Rlcl9uYW1lGAIgASgJEhQKDHNpZ25pbmdfYWxnbxgDIAEoCRIUCgxoYXNoaW5nX2FsZ28YBCABKAkilwEKDlJlcG9ydFJlc3BvbnNlEhUKDWNvbmZpZ19kaWdlc3QYASABKAwSEgoGc2VxX25yGAIgASgEQgIwABIWCg5yZXBvcnRfY29udGV4dBgDIAEoDBISCgpyYXdfcmVwb3J0GAQgASgMEi4KBHNpZ3MYBSADKAsyIC5zZGsudjFhbHBoYS5BdHRyaWJ1dGVkU2lnbmF0dXJlIjsKE0F0dHJpYnV0ZWRTaWduYXR1cmUSEQoJc2lnbmF0dXJlGAEgASgMEhEKCXNpZ25lcl9pZBgCIAEoDSJrChFDYXBhYmlsaXR5UmVxdWVzdBIKCgJpZBgBIAEoCRIlCgdwYXlsb2FkGAIgASgLMhQuZ29vZ2xlLnByb3RvYnVmLkFueRIOCgZtZXRob2QYAyABKAkSEwoLY2FsbGJhY2tfaWQYBCABKAUiWgoSQ2FwYWJpbGl0eVJlc3BvbnNlEicKB3BheWxvYWQYASABKAsyFC5nb29nbGUucHJvdG9idWYuQW55SAASDwoFZXJyb3IYAiABKAlIAEIKCghyZXNwb25zZSKbAQoTVHJpZ2dlclN1YnNjcmlwdGlvbhIKCgJpZBgBIAEoCRIlCgdwYXlsb2FkGAIgASgLMhQuZ29vZ2xlLnByb3RvYnVmLkFueRIOCgZtZXRob2QYAyABKAkSLwoMcmVxdWlyZW1lbnRzGAQgASgLMhkuc2RrLnYxYWxwaGEuUmVxdWlyZW1lbnRzEhAKCHByZV9ob29rGAUgASgIIkgKEVRlZVR5cGVBbmRSZWdpb25zEiIKBHR5cGUYASABKA4yFC5zZGsudjFhbHBoYS5UZWVUeXBlEg8KB3JlZ2lvbnMYAyADKAkiVQoaVHJpZ2dlclN1YnNjcmlwdGlvblJlcXVlc3QSNwoNc3Vic2NyaXB0aW9ucxgBIAMoCzIgLnNkay52MWFscGhhLlRyaWdnZXJTdWJzY3JpcHRpb24iQAoHVHJpZ2dlchIOCgJpZBgBIAEoBEICMAASJQoHcGF5bG9hZBgCIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkiGgoHUmVnaW9ucxIPCgdyZWdpb25zGAEgAygJIlIKElRlZVR5cGVzQW5kUmVnaW9ucxI8ChR0ZWVfdHlwZV9hbmRfcmVnaW9ucxgBIAMoCzIeLnNkay52MWFscGhhLlRlZVR5cGVBbmRSZWdpb25zInwKA1RlZRIrCgthbnlfcmVnaW9ucxgBIAEoCzIULnNkay52MWFscGhhLlJlZ2lvbnNIABJAChV0ZWVfdHlwZXNfYW5kX3JlZ2lvbnMYAiABKAsyHy5zZGsudjFhbHBoYS5UZWVUeXBlc0FuZFJlZ2lvbnNIAEIGCgRpdGVtIi0KDFJlcXVpcmVtZW50cxIdCgN0ZWUYASABKAsyEC5zZGsudjFhbHBoYS5UZWUiJwoYQXdhaXRDYXBhYmlsaXRpZXNSZXF1ZXN0EgsKA2lkcxgBIAMoBSK4AQoZQXdhaXRDYXBhYmlsaXRpZXNSZXNwb25zZRJICglyZXNwb25zZXMYASADKAsyNS5zZGsudjFhbHBoYS5Bd2FpdENhcGFiaWxpdGllc1Jlc3BvbnNlLlJlc3BvbnNlc0VudHJ5GlEKDlJlc3BvbnNlc0VudHJ5EgsKA2tleRgBIAEoBRIuCgV2YWx1ZRgCIAEoCzIfLnNkay52MWFscGhhLkNhcGFiaWxpdHlSZXNwb25zZToCOAEiygEKDkV4ZWN1dGVSZXF1ZXN0Eg4KBmNvbmZpZxgBIAEoDBIrCglzdWJzY3JpYmUYAiABKAsyFi5nb29nbGUucHJvdG9idWYuRW1wdHlIABInCgd0cmlnZ2VyGAMgASgLMhQuc2RrLnYxYWxwaGEuVHJpZ2dlckgAEigKCHByZV9ob29rGAUgASgLMhQuc2RrLnYxYWxwaGEuVHJpZ2dlckgAEh0KEW1heF9yZXNwb25zZV9zaXplGAQgASgEQgIwAEIJCgdyZXF1ZXN0IswBCg9FeGVjdXRpb25SZXN1bHQSIQoFdmFsdWUYASABKAsyEC52YWx1ZXMudjEuVmFsdWVIABIPCgVlcnJvchgCIAEoCUgAEkgKFXRyaWdnZXJfc3Vic2NyaXB0aW9ucxgDIAEoCzInLnNkay52MWFscGhhLlRyaWdnZXJTdWJzY3JpcHRpb25SZXF1ZXN0SAASMQoMcmVzdHJpY3Rpb25zGAQgASgLMhkuc2RrLnYxYWxwaGEuUmVzdHJpY3Rpb25zSABCCAoGcmVzdWx0IlYKEUdldFNlY3JldHNSZXF1ZXN0EiwKCHJlcXVlc3RzGAEgAygLMhouc2RrLnYxYWxwaGEuU2VjcmV0UmVxdWVzdBITCgtjYWxsYmFja19pZBgCIAEoBSIiChNBd2FpdFNlY3JldHNSZXF1ZXN0EgsKA2lkcxgBIAMoBSKrAQoUQXdhaXRTZWNyZXRzUmVzcG9uc2USQwoJcmVzcG9uc2VzGAEgAygLMjAuc2RrLnYxYWxwaGEuQXdhaXRTZWNyZXRzUmVzcG9uc2UuUmVzcG9uc2VzRW50cnkaTgoOUmVzcG9uc2VzRW50cnkSCwoDa2V5GAEgASgFEisKBXZhbHVlGAIgASgLMhwuc2RrLnYxYWxwaGEuU2VjcmV0UmVzcG9uc2VzOgI4ASIuCg1TZWNyZXRSZXF1ZXN0EgoKAmlkGAEgASgJEhEKCW5hbWVzcGFjZRgCIAEoCSJFCgZTZWNyZXQSCgoCaWQYASABKAkSEQoJbmFtZXNwYWNlGAIgASgJEg0KBW93bmVyGAMgASgJEg0KBXZhbHVlGAQgASgJIkoKC1NlY3JldEVycm9yEgoKAmlkGAEgASgJEhEKCW5hbWVzcGFjZRgCIAEoCRINCgVvd25lchgDIAEoCRINCgVlcnJvchgEIAEoCSJuCg5TZWNyZXRSZXNwb25zZRIlCgZzZWNyZXQYASABKAsyEy5zZGsudjFhbHBoYS5TZWNyZXRIABIpCgVlcnJvchgCIAEoCzIYLnNkay52MWFscGhhLlNlY3JldEVycm9ySABCCgoIcmVzcG9uc2UiQQoPU2VjcmV0UmVzcG9uc2VzEi4KCXJlc3BvbnNlcxgBIAMoCzIbLnNkay52MWFscGhhLlNlY3JldFJlc3BvbnNlIkIKEU1ldGhvZFJlc3RyaWN0aW9uEgoKAmlkGAEgASgJEg4KBm1ldGhvZBgCIAEoCRIRCgltYXhfY2FsbHMYAyABKA0iWAoVQ2FwYWJpbGl0eVJlc3RyaWN0aW9uEjAKBm1ldGhvZBgBIAEoCzIeLnNkay52MWFscGhhLk1ldGhvZFJlc3RyaWN0aW9uSABCDQoLcmVzdHJpY3Rpb24ioQEKFkNhcGFiaWxpdHlSZXN0cmljdGlvbnMSOAoMcmVzdHJpY3Rpb25zGAEgAygLMiIuc2RrLnYxYWxwaGEuQ2FwYWJpbGl0eVJlc3RyaWN0aW9uEhcKD21heF90b3RhbF9jYWxscxgCIAEoDRI0CgR0eXBlGAMgASgOMiYuc2RrLnYxYWxwaGEuQ2FwYWJpbGl0eVJlc3RyaWN0aW9uVHlwZSJRChdTZWNyZXRQcmVmaXhSZXN0cmljdGlvbhIOCgZwcmVmaXgYASABKAkSEQoJbmFtZXNwYWNlGAIgASgJEhMKC21heF9zZWNyZXRzGAMgASgNIpABChFTZWNyZXRSZXN0cmljdGlvbhIrCgxleGFjdF9zZWNyZXQYASABKAsyEy5zZGsudjFhbHBoYS5TZWNyZXRIABI/Cg9wcmVmaXhlZF9zZWNyZXQYAiABKAsyJC5zZGsudjFhbHBoYS5TZWNyZXRQcmVmaXhSZXN0cmljdGlvbkgAQg0KC3Jlc3RyaWN0aW9uIl8KElNlY3JldHNSZXN0cml0aW9ucxI0CgxyZXN0cmljdGlvbnMYASADKAsyHi5zZGsudjFhbHBoYS5TZWNyZXRSZXN0cmljdGlvbhITCgttYXhfc2VjcmV0cxgCIAEoDSJ7CgxSZXN0cmljdGlvbnMSMAoHc2VjcmV0cxgBIAEoCzIfLnNkay52MWFscGhhLlNlY3JldHNSZXN0cml0aW9ucxI5CgxjYXBhYmlsaXRpZXMYAiABKAsyIy5zZGsudjFhbHBoYS5DYXBhYmlsaXR5UmVzdHJpY3Rpb25zKt0BCg9BZ2dyZWdhdGlvblR5cGUSIAocQUdHUkVHQVRJT05fVFlQRV9VTlNQRUNJRklFRBAAEhsKF0FHR1JFR0FUSU9OX1RZUEVfTUVESUFOEAESHgoaQUdHUkVHQVRJT05fVFlQRV9JREVOVElDQUwQAhIiCh5BR0dSRUdBVElPTl9UWVBFX0NPTU1PTl9QUkVGSVgQAxIiCh5BR0dSRUdBVElPTl9UWVBFX0NPTU1PTl9TVUZGSVgQBBIjCh9BR0dSRUdBVElPTl9UWVBFX0ZSRVFVRU5DWV9MSVNUEAUqOQoETW9kZRIUChBNT0RFX1VOU1BFQ0lGSUVEEAASDAoITU9ERV9ET04QARINCglNT0RFX05PREUQAio7CgdUZWVUeXBlEhgKFFRFRV9UWVBFX1VOU1BFQ0lGSUVEEAASFgoSVEVFX1RZUEVfQVdTX05JVFJPEAEqaQoZQ2FwYWJpbGl0eVJlc3RyaWN0aW9uVHlwZRImCiJDQVBBQklMSVRZX1JFU1RSSUNUSU9OX1RZUEVfQ0xPU0VEEAASJAogQ0FQQUJJTElUWV9SRVNUUklDVElPTl9UWVBFX09QRU4QAUJoCg9jb20uc2RrLnYxYWxwaGFCCFNka1Byb3RvUAGiAgNTWFiqAgtTZGsuVjFhbHBoYcoCC1Nka1xWMWFscGhh4gIXU2RrXFYxYWxwaGFcR1BCTWV0YWRhdGHqAgxTZGs6OlYxYWxwaGFiBnByb3RvMw", [file_google_protobuf_any, file_google_protobuf_empty, file_values_v1_values]);
 var SimpleConsensusInputsSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 0);
+var ConsensusDescriptorSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 2);
 var ReportRequestSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 3);
 var ReportResponseSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 4);
 var AttributedSignatureSchema = /* @__PURE__ */ messageDesc(file_sdk_v1alpha_sdk, 5);
@@ -5991,6 +5992,26 @@ var AdditionalEnvironments;
   AdditionalEnvironments[AdditionalEnvironments["UNSPECIFIED"] = 0] = "UNSPECIFIED";
   AdditionalEnvironments[AdditionalEnvironments["TEE"] = 1] = "TEE";
 })(AdditionalEnvironments || (AdditionalEnvironments = {}));
+var file_capabilities_blockchain_evm_v1alpha_client = /* @__PURE__ */ fileDesc("CjBjYXBhYmlsaXRpZXMvYmxvY2tjaGFpbi9ldm0vdjFhbHBoYS9jbGllbnQucHJvdG8SI2NhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhIh0KC1RvcGljVmFsdWVzEg4KBnZhbHVlcxgBIAMoDCK4AQoXRmlsdGVyTG9nVHJpZ2dlclJlcXVlc3QSEQoJYWRkcmVzc2VzGAEgAygMEkAKBnRvcGljcxgCIAMoCzIwLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLlRvcGljVmFsdWVzEkgKCmNvbmZpZGVuY2UYAyABKA4yNC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Db25maWRlbmNlTGV2ZWwiegoTQ2FsbENvbnRyYWN0UmVxdWVzdBI6CgRjYWxsGAEgASgLMiwuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuQ2FsbE1zZxInCgxibG9ja19udW1iZXIYAiABKAsyES52YWx1ZXMudjEuQmlnSW50IiEKEUNhbGxDb250cmFjdFJlcGx5EgwKBGRhdGEYASABKAwiWwoRRmlsdGVyTG9nc1JlcXVlc3QSRgoMZmlsdGVyX3F1ZXJ5GAEgASgLMjAuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRmlsdGVyUXVlcnkiSQoPRmlsdGVyTG9nc1JlcGx5EjYKBGxvZ3MYASADKAsyKC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Mb2cixwEKA0xvZxIPCgdhZGRyZXNzGAEgASgMEg4KBnRvcGljcxgCIAMoDBIPCgd0eF9oYXNoGAMgASgMEhIKCmJsb2NrX2hhc2gYBCABKAwSDAoEZGF0YRgFIAEoDBIRCglldmVudF9zaWcYBiABKAwSJwoMYmxvY2tfbnVtYmVyGAcgASgLMhEudmFsdWVzLnYxLkJpZ0ludBIQCgh0eF9pbmRleBgIIAEoDRINCgVpbmRleBgJIAEoDRIPCgdyZW1vdmVkGAogASgIIjEKB0NhbGxNc2cSDAoEZnJvbRgBIAEoDBIKCgJ0bxgCIAEoDBIMCgRkYXRhGAMgASgMIr0BCgtGaWx0ZXJRdWVyeRISCgpibG9ja19oYXNoGAEgASgMEiUKCmZyb21fYmxvY2sYAiABKAsyES52YWx1ZXMudjEuQmlnSW50EiMKCHRvX2Jsb2NrGAMgASgLMhEudmFsdWVzLnYxLkJpZ0ludBIRCglhZGRyZXNzZXMYBCADKAwSOwoGdG9waWNzGAUgAygLMisuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuVG9waWNzIhcKBlRvcGljcxINCgV0b3BpYxgBIAMoDCJMChBCYWxhbmNlQXRSZXF1ZXN0Eg8KB2FjY291bnQYASABKAwSJwoMYmxvY2tfbnVtYmVyGAIgASgLMhEudmFsdWVzLnYxLkJpZ0ludCI0Cg5CYWxhbmNlQXRSZXBseRIiCgdiYWxhbmNlGAEgASgLMhEudmFsdWVzLnYxLkJpZ0ludCJPChJFc3RpbWF0ZUdhc1JlcXVlc3QSOQoDbXNnGAEgASgLMiwuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuQ2FsbE1zZyIjChBFc3RpbWF0ZUdhc1JlcGx5Eg8KA2dhcxgBIAEoBEICMAAiKwobR2V0VHJhbnNhY3Rpb25CeUhhc2hSZXF1ZXN0EgwKBGhhc2gYASABKAwiYgoZR2V0VHJhbnNhY3Rpb25CeUhhc2hSZXBseRJFCgt0cmFuc2FjdGlvbhgBIAEoCzIwLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLlRyYW5zYWN0aW9uIqEBCgtUcmFuc2FjdGlvbhIRCgVub25jZRgBIAEoBEICMAASDwoDZ2FzGAIgASgEQgIwABIKCgJ0bxgDIAEoDBIMCgRkYXRhGAQgASgMEgwKBGhhc2gYBSABKAwSIAoFdmFsdWUYBiABKAsyES52YWx1ZXMudjEuQmlnSW50EiQKCWdhc19wcmljZRgHIAEoCzIRLnZhbHVlcy52MS5CaWdJbnQiLAocR2V0VHJhbnNhY3Rpb25SZWNlaXB0UmVxdWVzdBIMCgRoYXNoGAEgASgMIlsKGkdldFRyYW5zYWN0aW9uUmVjZWlwdFJlcGx5Ej0KB3JlY2VpcHQYASABKAsyLC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5SZWNlaXB0IpkCCgdSZWNlaXB0EhIKBnN0YXR1cxgBIAEoBEICMAASFAoIZ2FzX3VzZWQYAiABKARCAjAAEhQKCHR4X2luZGV4GAMgASgEQgIwABISCgpibG9ja19oYXNoGAQgASgMEjYKBGxvZ3MYBiADKAsyKC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Mb2cSDwoHdHhfaGFzaBgHIAEoDBIuChNlZmZlY3RpdmVfZ2FzX3ByaWNlGAggASgLMhEudmFsdWVzLnYxLkJpZ0ludBInCgxibG9ja19udW1iZXIYCSABKAsyES52YWx1ZXMudjEuQmlnSW50EhgKEGNvbnRyYWN0X2FkZHJlc3MYCiABKAwiQAoVSGVhZGVyQnlOdW1iZXJSZXF1ZXN0EicKDGJsb2NrX251bWJlchgBIAEoCzIRLnZhbHVlcy52MS5CaWdJbnQiUgoTSGVhZGVyQnlOdW1iZXJSZXBseRI7CgZoZWFkZXIYASABKAsyKy5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5IZWFkZXIiawoGSGVhZGVyEhUKCXRpbWVzdGFtcBgBIAEoBEICMAASJwoMYmxvY2tfbnVtYmVyGAIgASgLMhEudmFsdWVzLnYxLkJpZ0ludBIMCgRoYXNoGAMgASgMEhMKC3BhcmVudF9oYXNoGAQgASgMIqsBChJXcml0ZVJlcG9ydFJlcXVlc3QSEAoIcmVjZWl2ZXIYASABKAwSKwoGcmVwb3J0GAIgASgLMhsuc2RrLnYxYWxwaGEuUmVwb3J0UmVzcG9uc2USRwoKZ2FzX2NvbmZpZxgDIAEoCzIuLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLkdhc0NvbmZpZ0gAiAEBQg0KC19nYXNfY29uZmlnIiIKCUdhc0NvbmZpZxIVCglnYXNfbGltaXQYASABKARCAjAAIocDChBXcml0ZVJlcG9ydFJlcGx5EkAKCXR4X3N0YXR1cxgBIAEoDjItLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLlR4U3RhdHVzEnUKInJlY2VpdmVyX2NvbnRyYWN0X2V4ZWN1dGlvbl9zdGF0dXMYAiABKA4yRC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5SZWNlaXZlckNvbnRyYWN0RXhlY3V0aW9uU3RhdHVzSACIAQESFAoHdHhfaGFzaBgDIAEoDEgBiAEBEi8KD3RyYW5zYWN0aW9uX2ZlZRgEIAEoCzIRLnZhbHVlcy52MS5CaWdJbnRIAogBARIaCg1lcnJvcl9tZXNzYWdlGAUgASgJSAOIAQFCJQojX3JlY2VpdmVyX2NvbnRyYWN0X2V4ZWN1dGlvbl9zdGF0dXNCCgoIX3R4X2hhc2hCEgoQX3RyYW5zYWN0aW9uX2ZlZUIQCg5fZXJyb3JfbWVzc2FnZSppCg9Db25maWRlbmNlTGV2ZWwSGQoVQ09ORklERU5DRV9MRVZFTF9TQUZFEAASGwoXQ09ORklERU5DRV9MRVZFTF9MQVRFU1QQARIeChpDT05GSURFTkNFX0xFVkVMX0ZJTkFMSVpFRBACKoIBCh9SZWNlaXZlckNvbnRyYWN0RXhlY3V0aW9uU3RhdHVzEi4KKlJFQ0VJVkVSX0NPTlRSQUNUX0VYRUNVVElPTl9TVEFUVVNfU1VDQ0VTUxAAEi8KK1JFQ0VJVkVSX0NPTlRSQUNUX0VYRUNVVElPTl9TVEFUVVNfUkVWRVJURUQQASpOCghUeFN0YXR1cxITCg9UWF9TVEFUVVNfRkFUQUwQABIWChJUWF9TVEFUVVNfUkVWRVJURUQQARIVChFUWF9TVEFUVVNfU1VDQ0VTUxACMuMbCgZDbGllbnQSgAEKDENhbGxDb250cmFjdBI4LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLkNhbGxDb250cmFjdFJlcXVlc3QaNi5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5DYWxsQ29udHJhY3RSZXBseRJ6CgpGaWx0ZXJMb2dzEjYuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRmlsdGVyTG9nc1JlcXVlc3QaNC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5GaWx0ZXJMb2dzUmVwbHkSdwoJQmFsYW5jZUF0EjUuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuQmFsYW5jZUF0UmVxdWVzdBozLmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLkJhbGFuY2VBdFJlcGx5En0KC0VzdGltYXRlR2FzEjcuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRXN0aW1hdGVHYXNSZXF1ZXN0GjUuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRXN0aW1hdGVHYXNSZXBseRKYAQoUR2V0VHJhbnNhY3Rpb25CeUhhc2gSQC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5HZXRUcmFuc2FjdGlvbkJ5SGFzaFJlcXVlc3QaPi5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5HZXRUcmFuc2FjdGlvbkJ5SGFzaFJlcGx5EpsBChVHZXRUcmFuc2FjdGlvblJlY2VpcHQSQS5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5HZXRUcmFuc2FjdGlvblJlY2VpcHRSZXF1ZXN0Gj8uY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuR2V0VHJhbnNhY3Rpb25SZWNlaXB0UmVwbHkShgEKDkhlYWRlckJ5TnVtYmVyEjouY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuSGVhZGVyQnlOdW1iZXJSZXF1ZXN0GjguY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuSGVhZGVyQnlOdW1iZXJSZXBseRJ2CgpMb2dUcmlnZ2VyEjwuY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGEuRmlsdGVyTG9nVHJpZ2dlclJlcXVlc3QaKC5jYXBhYmlsaXRpZXMuYmxvY2tjaGFpbi5ldm0udjFhbHBoYS5Mb2cwARJ9CgtXcml0ZVJlcG9ydBI3LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLldyaXRlUmVwb3J0UmVxdWVzdBo1LmNhcGFiaWxpdGllcy5ibG9ja2NoYWluLmV2bS52MWFscGhhLldyaXRlUmVwb3J0UmVwbHkaqBKCtRijEggBEglldm1AMS4wLjAakxIKDUNoYWluU2VsZWN0b3ISgRIS/hEKFwoLYWRpLW1haW5uZXQQ/PDmwrfn3ao4ChgKC2FkaS10ZXN0bmV0EP2myPr5hozaggEKJAoXYXBlY2hhaW4tdGVzdG5ldC1jdXJ0aXMQwcO0+I3EkrKJAQoXCgthcmMtdGVzdG5ldBDnxoye19fQjSoKHQoRYXZhbGFuY2hlLW1haW5uZXQQ1eeKwOHVmKRZCiMKFmF2YWxhbmNoZS10ZXN0bmV0LWZ1amkQm/n8kKLjqPjMAQooChtiaW5hbmNlX3NtYXJ0X2NoYWluLW1haW5uZXQQz/eU8djtlbidAQooChtiaW5hbmNlX3NtYXJ0X2NoYWluLXRlc3RuZXQQ+62+nICu5Iq4AQoYCgxjZWxvLW1haW5uZXQQhtTo2IaTiNcSChgKDGNlbG8tc2Vwb2xpYRDEw/yL/OedmjQKGgoOY3Jvbm9zLXRlc3RuZXQQ/dnureDe2sgpCiIKFWR0Y2MtbWFpbm5ldC1hcHBjaGFpbhDU1LHj17uKzsABCiIKFWR0Y2MtdGVzdG5ldC1hbmRlc2l0ZRDSg+PQmZblpNcBChwKEGV0aGVyZXVtLW1haW5uZXQQlfbx5M+ypsJFCicKG2V0aGVyZXVtLW1haW5uZXQtYXJiaXRydW0tMRDE6I3Njpuh10QKJAoXZXRoZXJldW0tbWFpbm5ldC1iYXNlLTEQgv+rov65kNPdAQoiChZldGhlcmV1bS1tYWlubmV0LWluay0xEKCwpum35qqEMAokChhldGhlcmV1bS1tYWlubmV0LWxpbmVhLTEQtrrpmMu9sJtACiUKGWV0aGVyZXVtLW1haW5uZXQtbWFudGxlLTEQiue0leewg8wVCicKG2V0aGVyZXVtLW1haW5uZXQtb3B0aW1pc20tMRC4lY/D9/7Q6TMKJgoZZXRoZXJldW0tbWFpbm5ldC1zY3JvbGwtMRC4vOTrxL7In7cBCikKHWV0aGVyZXVtLW1haW5uZXQtd29ybGRjaGFpbi0xEIfvurfFtsK4HAolChlldGhlcmV1bS1tYWlubmV0LXhsYXllci0xEJal/JymqO/tKQolChlldGhlcmV1bS1tYWlubmV0LXprc3luYy0xEJTul9nttLHXFQojChZldGhlcmV1bS10ZXN0bmV0LWhvb2RpEIOkr4ny2q2IkAEKJQoYZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhENm15M78ye6g3gEKLwojZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhLWFyYml0cnVtLTEQ6s7u/+q2hKMwCiwKH2V0aGVyZXVtLXRlc3RuZXQtc2Vwb2xpYS1iYXNlLTEQuMq57/aQrsiPAQosCiBldGhlcmV1bS10ZXN0bmV0LXNlcG9saWEtbGluZWEtMRDrqtT+gvnmr08KLQohZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhLW1hbnRsZS0xENXGuO7N9vKmcgovCiNldGhlcmV1bS10ZXN0bmV0LXNlcG9saWEtb3B0aW1pc20tMRCfhsWhvtjDwEgKLQohZXRoZXJldW0tdGVzdG5ldC1zZXBvbGlhLXNjcm9sbC0xEIvptL7buu3RHwowCiNldGhlcmV1bS10ZXN0bmV0LXNlcG9saWEtdW5pY2hhaW4tMRC03v7g7JeplsQBCjEKJWV0aGVyZXVtLXRlc3RuZXQtc2Vwb2xpYS13b3JsZGNoYWluLTEQut/gxcep88VJCi0KIWV0aGVyZXVtLXRlc3RuZXQtc2Vwb2xpYS16a3N5bmMtMRC3wfz98sSA3l8KIAoUZ25vc2lzX2NoYWluLW1haW5uZXQQ9JKt2vKirroGCicKG2dub3Npc19jaGFpbi10ZXN0bmV0LWNoaWFkbxCzsYLQm6WPj3sKHwoTaHlwZXJsaXF1aWQtbWFpbm5ldBCns/jdztHp8iEKHwoTaHlwZXJsaXF1aWQtdGVzdG5ldBCIzt3Il+DJvTsKIAoTaW5rLXRlc3RuZXQtc2Vwb2xpYRDo9Kel8+aWwIcBChkKDWpvdmF5LW1haW5uZXQQtcPEmqGA35IVChkKDWpvdmF5LXRlc3RuZXQQ5M+KhN6y3o4NChsKD21lZ2FldGgtbWFpbm5ldBDqlbbIvOSmyFQKHgoRbWVnYWV0aC10ZXN0bmV0LTIQ443eiLGP/ZP9AQoZCg1tb25hZC1tYWlubmV0EPnAycz/jufadQoZCg1tb25hZC10ZXN0bmV0ENCQz5Gm9OilHgokChdwaGFyb3MtYXRsYW50aWMtdGVzdG5ldBDMme3gzryvtN8BChoKDnBoYXJvcy1tYWlubmV0EMjBh571782hbAobCg5wbGFzbWEtbWFpbm5ldBD4m/HR2snVxoEBChoKDnBsYXNtYS10ZXN0bmV0ENWbv6XDtJmHNwobCg9wb2x5Z29uLW1haW5uZXQQsavk8JqShp04CiEKFHBvbHlnb24tdGVzdG5ldC1hbW95EM2P1t/xx5D64QEKJAoYcHJpdmF0ZS10ZXN0bmV0LWFuZGVzaXRlENSmmKXBj9z8XwojChZwcml2YXRlLXRlc3RuZXQtYmFzYWx0EP/t5OTou7vp/gEKIgoWcHJpdmF0ZS10ZXN0bmV0LXB1bWljZRD5wsS2xKXE2xUKJQoZcHJpdmF0ZS10ZXN0bmV0LXF1YXJ0eml0ZRD58KLdrN2H+jkKJAoYcHJpdmF0ZS10ZXN0bmV0LXJoeW9saXRlEIH6ievhtNuxCAodChFyb2Jpbmhvb2QtdGVzdG5ldBDI7fy+ppGomxwKGQoNc29uaWMtbWFpbm5ldBDRsuXt2aCynRcKGQoNc29uaWMtdGVzdG5ldBDIiPvUtMb6vBgKGwoOc3RhYmxlLXRlc3RuZXQQnZGLs6WgpdWjAQoaCg10LXJleC10ZXN0bmV0EP3A49zL/Yi19AEKGAoLdGFjLXRlc3RuZXQQ1duN4/ufk9eDAQoiChZ0ZW1wby10ZXN0bmV0LW1vZGVyYXRvEJObwOnkhI2wdQobCg54bGF5ZXItdGVzdG5ldBDJvqG0rcy83Y0BQuUBCidjb20uY2FwYWJpbGl0aWVzLmJsb2NrY2hhaW4uZXZtLnYxYWxwaGFCC0NsaWVudFByb3RvUAGiAgNDQkWqAiNDYXBhYmlsaXRpZXMuQmxvY2tjaGFpbi5Fdm0uVjFhbHBoYcoCI0NhcGFiaWxpdGllc1xCbG9ja2NoYWluXEV2bVxWMWFscGhh4gIvQ2FwYWJpbGl0aWVzXEJsb2NrY2hhaW5cRXZtXFYxYWxwaGFcR1BCTWV0YWRhdGHqAiZDYXBhYmlsaXRpZXM6OkJsb2NrY2hhaW46OkV2bTo6VjFhbHBoYWIGcHJvdG8z", [file_sdk_v1alpha_sdk, file_tools_generator_v1alpha_cre_metadata, file_values_v1_values]);
+var FilterLogTriggerRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 1);
+var CallContractRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 2);
+var CallContractReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 3);
+var FilterLogsRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 4);
+var FilterLogsReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 5);
+var LogSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 6);
+var BalanceAtRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 10);
+var BalanceAtReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 11);
+var EstimateGasRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 12);
+var EstimateGasReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 13);
+var GetTransactionByHashRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 14);
+var GetTransactionByHashReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 15);
+var GetTransactionReceiptRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 17);
+var GetTransactionReceiptReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 18);
+var HeaderByNumberRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 20);
+var HeaderByNumberReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 21);
+var WriteReportRequestSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 23);
+var GasConfigSchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 24);
+var WriteReportReplySchema = /* @__PURE__ */ messageDesc(file_capabilities_blockchain_evm_v1alpha_client, 25);
 var ConfidenceLevel;
 (function(ConfidenceLevel) {
   ConfidenceLevel[ConfidenceLevel["SAFE"] = 0] = "SAFE";
@@ -6008,6 +6029,37 @@ var TxStatus;
   TxStatus[TxStatus["REVERTED"] = 1] = "REVERTED";
   TxStatus[TxStatus["SUCCESS"] = 2] = "SUCCESS";
 })(TxStatus || (TxStatus = {}));
+var zeroAddress = "0x0000000000000000000000000000000000000000";
+function formatAbiItem(abiItem, { includeName = false } = {}) {
+  if (abiItem.type !== "function" && abiItem.type !== "event" && abiItem.type !== "error")
+    throw new InvalidDefinitionTypeError(abiItem.type);
+  return `${abiItem.name}(${formatAbiParams(abiItem.inputs, { includeName })})`;
+}
+function formatAbiParams(params, { includeName = false } = {}) {
+  if (!params)
+    return "";
+  return params.map((param) => formatAbiParam(param, { includeName })).join(includeName ? ", " : ",");
+}
+function formatAbiParam(param, { includeName }) {
+  if (param.type.startsWith("tuple")) {
+    return `(${formatAbiParams(param.components, { includeName })})${param.type.slice("tuple".length)}`;
+  }
+  return param.type + (includeName && param.name ? ` ${param.name}` : "");
+}
+function isHex(value, { even = false, strict = true } = {}) {
+  if (!value)
+    return false;
+  if (typeof value !== "string")
+    return false;
+  if (even && value.length % 2 !== 0)
+    return false;
+  return strict ? /^0x[0-9a-fA-F]*$/.test(value) : value.startsWith("0x");
+}
+function size(value) {
+  if (isHex(value, { strict: false }))
+    return Math.ceil((value.length - 2) / 2);
+  return value.length;
+}
 var version = "2.57.14";
 var errorConfig = {
   getDocsUrl: ({ docsBaseUrl, docsPath = "", docsSlug }) => docsPath ? `${docsBaseUrl ?? "https://viem.sh"}${docsPath}${docsSlug ? `#${docsSlug}` : ""}` : undefined,
@@ -6094,25 +6146,277 @@ function walk(err, fn) {
   return fn ? null : err;
 }
 
-class InvalidAddressError extends BaseError {
-  constructor({ address }) {
-    super(`Address "${address}" is invalid.`, {
+class AbiDecodingDataSizeTooSmallError extends BaseError {
+  constructor({ data, params, size }) {
+    super([`Data size of ${size} bytes is too small for given parameters.`].join(`
+`), {
       metaMessages: [
-        "- Address must be a hex value of 20 bytes (40 hex characters).",
-        "- Address must match its checksum counterpart."
+        `Params: (${formatAbiParams(params, { includeName: true })})`,
+        `Data:   ${data} (${size} bytes)`
       ],
-      name: "InvalidAddressError"
+      name: "AbiDecodingDataSizeTooSmallError"
+    });
+    Object.defineProperty(this, "data", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "params", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "size", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    this.data = data;
+    this.params = params;
+    this.size = size;
+  }
+}
+
+class AbiDecodingZeroDataError extends BaseError {
+  constructor({ cause } = {}) {
+    super('Cannot decode zero data ("0x") with ABI parameters.', {
+      name: "AbiDecodingZeroDataError",
+      cause
     });
   }
 }
-function isHex(value, { even = false, strict = true } = {}) {
-  if (!value)
-    return false;
-  if (typeof value !== "string")
-    return false;
-  if (even && value.length % 2 !== 0)
-    return false;
-  return strict ? /^0x[0-9a-fA-F]*$/.test(value) : value.startsWith("0x");
+
+class AbiEncodingArrayLengthMismatchError extends BaseError {
+  constructor({ expectedLength, givenLength, type }) {
+    super([
+      `ABI encoding array length mismatch for type ${type}.`,
+      `Expected length: ${expectedLength}`,
+      `Given length: ${givenLength}`
+    ].join(`
+`), { name: "AbiEncodingArrayLengthMismatchError" });
+  }
+}
+
+class AbiEncodingBytesSizeMismatchError extends BaseError {
+  constructor({ expectedSize, value }) {
+    super(`Size of bytes "${value}" (bytes${size(value)}) does not match expected size (bytes${expectedSize}).`, { name: "AbiEncodingBytesSizeMismatchError" });
+  }
+}
+
+class AbiEncodingLengthMismatchError extends BaseError {
+  constructor({ expectedLength, givenLength }) {
+    super([
+      "ABI encoding params/values length mismatch.",
+      `Expected length (params): ${expectedLength}`,
+      `Given length (values): ${givenLength}`
+    ].join(`
+`), { name: "AbiEncodingLengthMismatchError" });
+  }
+}
+
+class AbiEventSignatureEmptyTopicsError extends BaseError {
+  constructor({ docsPath }) {
+    super("Cannot extract event signature from empty topics.", {
+      docsPath,
+      name: "AbiEventSignatureEmptyTopicsError"
+    });
+  }
+}
+
+class AbiEventSignatureNotFoundError extends BaseError {
+  constructor(signature, { docsPath }) {
+    super([
+      `Encoded event signature "${signature}" not found on ABI.`,
+      "Make sure you are using the correct ABI and that the event exists on it.",
+      `You can look up the signature here: https://4byte.sourcify.dev/?q=${signature}.`
+    ].join(`
+`), {
+      docsPath,
+      name: "AbiEventSignatureNotFoundError"
+    });
+  }
+}
+
+class AbiEventNotFoundError extends BaseError {
+  constructor(eventName, { docsPath } = {}) {
+    super([
+      `Event ${eventName ? `"${eventName}" ` : ""}not found on ABI.`,
+      "Make sure you are using the correct ABI and that the event exists on it."
+    ].join(`
+`), {
+      docsPath,
+      name: "AbiEventNotFoundError"
+    });
+  }
+}
+
+class AbiFunctionNotFoundError extends BaseError {
+  constructor(functionName, { docsPath } = {}) {
+    super([
+      `Function ${functionName ? `"${functionName}" ` : ""}not found on ABI.`,
+      "Make sure you are using the correct ABI and that the function exists on it."
+    ].join(`
+`), {
+      docsPath,
+      name: "AbiFunctionNotFoundError"
+    });
+  }
+}
+
+class AbiFunctionOutputsNotFoundError extends BaseError {
+  constructor(functionName, { docsPath }) {
+    super([
+      `Function "${functionName}" does not contain any \`outputs\` on ABI.`,
+      "Cannot decode function result without knowing what the parameter types are.",
+      "Make sure you are using the correct ABI and that the function exists on it."
+    ].join(`
+`), {
+      docsPath,
+      name: "AbiFunctionOutputsNotFoundError"
+    });
+  }
+}
+
+class AbiItemAmbiguityError extends BaseError {
+  constructor(x, y) {
+    super("Found ambiguous types in overloaded ABI items.", {
+      metaMessages: [
+        `\`${x.type}\` in \`${formatAbiItem(x.abiItem)}\`, and`,
+        `\`${y.type}\` in \`${formatAbiItem(y.abiItem)}\``,
+        "",
+        "These types encode differently and cannot be distinguished at runtime.",
+        "Remove one of the ambiguous items in the ABI."
+      ],
+      name: "AbiItemAmbiguityError"
+    });
+  }
+}
+
+class DecodeLogDataMismatch extends BaseError {
+  constructor({ abiItem, data, params, size }) {
+    super([
+      `Data size of ${size} bytes is too small for non-indexed event parameters.`
+    ].join(`
+`), {
+      metaMessages: [
+        `Params: (${formatAbiParams(params, { includeName: true })})`,
+        `Data:   ${data} (${size} bytes)`
+      ],
+      name: "DecodeLogDataMismatch"
+    });
+    Object.defineProperty(this, "abiItem", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "data", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "params", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "size", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    this.abiItem = abiItem;
+    this.data = data;
+    this.params = params;
+    this.size = size;
+  }
+}
+
+class DecodeLogTopicsMismatch extends BaseError {
+  constructor({ abiItem, param }) {
+    super([
+      `Expected a topic for indexed event parameter${param.name ? ` "${param.name}"` : ""} on event "${formatAbiItem(abiItem, { includeName: true })}".`
+    ].join(`
+`), { name: "DecodeLogTopicsMismatch" });
+    Object.defineProperty(this, "abiItem", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    this.abiItem = abiItem;
+  }
+}
+
+class InvalidAbiEncodingTypeError extends BaseError {
+  constructor(type, { docsPath }) {
+    super([
+      `Type "${type}" is not a valid encoding type.`,
+      "Please provide a valid ABI type."
+    ].join(`
+`), { docsPath, name: "InvalidAbiEncodingType" });
+  }
+}
+
+class InvalidAbiDecodingTypeError extends BaseError {
+  constructor(type, { docsPath }) {
+    super([
+      `Type "${type}" is not a valid decoding type.`,
+      "Please provide a valid ABI type."
+    ].join(`
+`), { docsPath, name: "InvalidAbiDecodingType" });
+  }
+}
+
+class InvalidArrayError extends BaseError {
+  constructor(value) {
+    super([`Value "${value}" is not a valid array.`].join(`
+`), {
+      name: "InvalidArrayError"
+    });
+  }
+}
+
+class InvalidDefinitionTypeError extends BaseError {
+  constructor(type) {
+    super([
+      `"${type}" is not a valid definition type.`,
+      'Valid types: "function", "event", "error"'
+    ].join(`
+`), { name: "InvalidDefinitionTypeError" });
+  }
+}
+
+class NegativeOffsetError extends BaseError {
+  constructor({ offset }) {
+    super(`Offset \`${offset}\` cannot be negative.`, {
+      name: "NegativeOffsetError"
+    });
+  }
+}
+
+class PositionOutOfBoundsError extends BaseError {
+  constructor({ length, position }) {
+    super(`Position \`${position}\` is out of bounds (\`0 < position < ${length}\`).`, { name: "PositionOutOfBoundsError" });
+  }
+}
+
+class RecursiveReadLimitExceededError extends BaseError {
+  constructor({ count, limit }) {
+    super(`Recursive read limit of \`${limit}\` exceeded (recursive read count: \`${count}\`).`, { name: "RecursiveReadLimitExceededError" });
+  }
+}
+
+class SliceOffsetOutOfBoundsError extends BaseError {
+  constructor({ offset, position, size }) {
+    super(`Slice ${position === "start" ? "starting" : "ending"} at offset "${offset}" is out-of-bounds (size: ${size}).`, { name: "SliceOffsetOutOfBoundsError" });
+  }
 }
 
 class SizeExceedsPaddingSizeError extends BaseError {
@@ -6160,15 +6464,35 @@ class IntegerOutOfRangeError extends BaseError {
   }
 }
 
+class InvalidBytesBooleanError extends BaseError {
+  constructor(bytes) {
+    super(`Bytes value "${bytes}" is not a valid boolean. The bytes array must contain a single byte of either a 0 or 1 value.`, {
+      name: "InvalidBytesBooleanError"
+    });
+  }
+}
+
 class SizeOverflowError extends BaseError {
   constructor({ givenSize, maxSize }) {
     super(`Size cannot exceed ${maxSize} bytes. Given size: ${givenSize} bytes.`, { name: "SizeOverflowError" });
   }
 }
-function size(value) {
-  if (isHex(value, { strict: false }))
-    return Math.ceil((value.length - 2) / 2);
-  return value.length;
+function trim(hexOrBytes, { dir = "left" } = {}) {
+  let data = typeof hexOrBytes === "string" ? hexOrBytes.replace("0x", "") : hexOrBytes;
+  let sliceLength = 0;
+  for (let i = 0;i < data.length - 1; i++) {
+    if (data[dir === "left" ? i : data.length - i - 1].toString() === "0")
+      sliceLength++;
+    else
+      break;
+  }
+  data = dir === "left" ? data.slice(sliceLength) : data.slice(0, data.length - sliceLength);
+  if (typeof hexOrBytes === "string") {
+    if (data.length === 1 && dir === "right")
+      data = `${data}0`;
+    return `0x${data.length % 2 === 1 ? `0${data}` : data}`;
+  }
+  return data;
 }
 function assertSize(hexOrBytes, { size: size2 }) {
   if (size(hexOrBytes) > size2)
@@ -6611,6 +6935,129 @@ function keccak256(value, to_) {
     return bytes;
   return toHex(bytes);
 }
+var hash = (value) => keccak256(toBytes(value));
+function hashSignature(sig) {
+  return hash(sig);
+}
+function execTyped(regex, string) {
+  const match = regex.exec(string);
+  return match?.groups;
+}
+var tupleRegex = /^tuple(?<array>(\[(\d*)\])*)$/;
+function formatAbiParameter(abiParameter) {
+  let type = abiParameter.type;
+  if (tupleRegex.test(abiParameter.type) && "components" in abiParameter) {
+    type = "(";
+    const length = abiParameter.components.length;
+    for (let i = 0;i < length; i++) {
+      const component = abiParameter.components[i];
+      type += formatAbiParameter(component);
+      if (i < length - 1)
+        type += ", ";
+    }
+    const result = execTyped(tupleRegex, abiParameter.type);
+    type += `)${result?.array || ""}`;
+    return formatAbiParameter({
+      ...abiParameter,
+      type
+    });
+  }
+  if ("indexed" in abiParameter && abiParameter.indexed)
+    type = `${type} indexed`;
+  if (abiParameter.name)
+    return `${type} ${abiParameter.name}`;
+  return type;
+}
+function formatAbiParameters(abiParameters) {
+  let params = "";
+  const length = abiParameters.length;
+  for (let i = 0;i < length; i++) {
+    const abiParameter = abiParameters[i];
+    params += formatAbiParameter(abiParameter);
+    if (i !== length - 1)
+      params += ", ";
+  }
+  return params;
+}
+function formatAbiItem2(abiItem) {
+  if (abiItem.type === "function")
+    return `function ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})${abiItem.stateMutability && abiItem.stateMutability !== "nonpayable" ? ` ${abiItem.stateMutability}` : ""}${abiItem.outputs?.length ? ` returns (${formatAbiParameters(abiItem.outputs)})` : ""}`;
+  if (abiItem.type === "event")
+    return `event ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})`;
+  if (abiItem.type === "error")
+    return `error ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})`;
+  if (abiItem.type === "constructor")
+    return `constructor(${formatAbiParameters(abiItem.inputs)})${abiItem.stateMutability === "payable" ? " payable" : ""}`;
+  if (abiItem.type === "fallback")
+    return `fallback() external${abiItem.stateMutability === "payable" ? " payable" : ""}`;
+  return "receive() external payable";
+}
+function normalizeSignature(signature) {
+  let active = true;
+  let current = "";
+  let level = 0;
+  let result = "";
+  let valid = false;
+  for (let i = 0;i < signature.length; i++) {
+    const char = signature[i];
+    if (["(", ")", ","].includes(char))
+      active = true;
+    if (char === "(")
+      level++;
+    if (char === ")")
+      level--;
+    if (!active)
+      continue;
+    if (level === 0) {
+      if (char === " " && ["event", "function", "error", ""].includes(result))
+        result = "";
+      else {
+        result += char;
+        if (char === ")") {
+          valid = true;
+          break;
+        }
+      }
+      continue;
+    }
+    if (char === " ") {
+      if (!current.endsWith(",") && !current.endsWith("(")) {
+        current = "";
+        active = false;
+      }
+      continue;
+    }
+    result += char;
+    current += char;
+  }
+  if (!valid)
+    throw new BaseError("Unable to normalize signature.");
+  return result;
+}
+var toSignature = (def) => {
+  const def_ = (() => {
+    if (typeof def === "string")
+      return def;
+    return formatAbiItem2(def);
+  })();
+  return normalizeSignature(def_);
+};
+function toSignatureHash(fn) {
+  return hashSignature(toSignature(fn));
+}
+var toEventSelector = toSignatureHash;
+
+class InvalidAddressError extends BaseError {
+  constructor({ address }) {
+    super(`Address "${address}" is invalid.`, {
+      metaMessages: [
+        "- Address must be a hex value of 20 bytes (40 hex characters).",
+        "- Address must match its checksum counterpart."
+      ],
+      name: "InvalidAddressError"
+    });
+  }
+}
 
 class LruMap extends Map {
   constructor(size) {
@@ -6686,8 +7133,978 @@ function getAddress(address, chainId) {
     throw new InvalidAddressError({ address });
   return checksumAddress(address, chainId);
 }
+var staticCursor = {
+  bytes: new Uint8Array,
+  dataView: new DataView(new ArrayBuffer(0)),
+  position: 0,
+  positionReadCount: new Map,
+  recursiveReadCount: 0,
+  recursiveReadLimit: Number.POSITIVE_INFINITY,
+  assertReadLimit() {
+    if (this.recursiveReadCount >= this.recursiveReadLimit)
+      throw new RecursiveReadLimitExceededError({
+        count: this.recursiveReadCount + 1,
+        limit: this.recursiveReadLimit
+      });
+  },
+  assertPosition(position) {
+    if (position < 0 || position > this.bytes.length - 1)
+      throw new PositionOutOfBoundsError({
+        length: this.bytes.length,
+        position
+      });
+  },
+  decrementPosition(offset) {
+    if (offset < 0)
+      throw new NegativeOffsetError({ offset });
+    const position = this.position - offset;
+    this.assertPosition(position);
+    this.position = position;
+  },
+  getReadCount(position) {
+    return this.positionReadCount.get(position || this.position) || 0;
+  },
+  incrementPosition(offset) {
+    if (offset < 0)
+      throw new NegativeOffsetError({ offset });
+    const position = this.position + offset;
+    this.assertPosition(position);
+    this.position = position;
+  },
+  inspectByte(position_) {
+    const position = position_ ?? this.position;
+    this.assertPosition(position);
+    return this.bytes[position];
+  },
+  inspectBytes(length, position_) {
+    const position = position_ ?? this.position;
+    this.assertPosition(position + length - 1);
+    return this.bytes.subarray(position, position + length);
+  },
+  inspectUint8(position_) {
+    const position = position_ ?? this.position;
+    this.assertPosition(position);
+    return this.bytes[position];
+  },
+  inspectUint16(position_) {
+    const position = position_ ?? this.position;
+    this.assertPosition(position + 1);
+    return this.dataView.getUint16(position);
+  },
+  inspectUint24(position_) {
+    const position = position_ ?? this.position;
+    this.assertPosition(position + 2);
+    return (this.dataView.getUint16(position) << 8) + this.dataView.getUint8(position + 2);
+  },
+  inspectUint32(position_) {
+    const position = position_ ?? this.position;
+    this.assertPosition(position + 3);
+    return this.dataView.getUint32(position);
+  },
+  pushByte(byte) {
+    this.assertPosition(this.position);
+    this.bytes[this.position] = byte;
+    this.position++;
+  },
+  pushBytes(bytes) {
+    this.assertPosition(this.position + bytes.length - 1);
+    this.bytes.set(bytes, this.position);
+    this.position += bytes.length;
+  },
+  pushUint8(value) {
+    this.assertPosition(this.position);
+    this.bytes[this.position] = value;
+    this.position++;
+  },
+  pushUint16(value) {
+    this.assertPosition(this.position + 1);
+    this.dataView.setUint16(this.position, value);
+    this.position += 2;
+  },
+  pushUint24(value) {
+    this.assertPosition(this.position + 2);
+    this.dataView.setUint16(this.position, value >> 8);
+    this.dataView.setUint8(this.position + 2, value & ~4294967040);
+    this.position += 3;
+  },
+  pushUint32(value) {
+    this.assertPosition(this.position + 3);
+    this.dataView.setUint32(this.position, value);
+    this.position += 4;
+  },
+  readByte() {
+    this.assertReadLimit();
+    this._touch();
+    const value = this.inspectByte();
+    this.position++;
+    return value;
+  },
+  readBytes(length, size) {
+    this.assertReadLimit();
+    this._touch();
+    const value = this.inspectBytes(length);
+    this.position += size ?? length;
+    return value;
+  },
+  readUint8() {
+    this.assertReadLimit();
+    this._touch();
+    const value = this.inspectUint8();
+    this.position += 1;
+    return value;
+  },
+  readUint16() {
+    this.assertReadLimit();
+    this._touch();
+    const value = this.inspectUint16();
+    this.position += 2;
+    return value;
+  },
+  readUint24() {
+    this.assertReadLimit();
+    this._touch();
+    const value = this.inspectUint24();
+    this.position += 3;
+    return value;
+  },
+  readUint32() {
+    this.assertReadLimit();
+    this._touch();
+    const value = this.inspectUint32();
+    this.position += 4;
+    return value;
+  },
+  get remaining() {
+    return this.bytes.length - this.position;
+  },
+  setPosition(position) {
+    const oldPosition = this.position;
+    this.assertPosition(position);
+    this.position = position;
+    return () => this.position = oldPosition;
+  },
+  _touch() {
+    if (this.recursiveReadLimit === Number.POSITIVE_INFINITY)
+      return;
+    const count = this.getReadCount();
+    this.positionReadCount.set(this.position, count + 1);
+    if (count > 0)
+      this.recursiveReadCount++;
+  }
+};
+function createCursor(bytes, { recursiveReadLimit = 8192 } = {}) {
+  const cursor = Object.create(staticCursor);
+  cursor.bytes = bytes;
+  cursor.dataView = new DataView(bytes.buffer ?? bytes, bytes.byteOffset, bytes.byteLength);
+  cursor.positionReadCount = new Map;
+  cursor.recursiveReadLimit = recursiveReadLimit;
+  return cursor;
+}
+function slice(value, start, end, { strict } = {}) {
+  if (isHex(value, { strict: false }))
+    return sliceHex(value, start, end, {
+      strict
+    });
+  return sliceBytes(value, start, end, {
+    strict
+  });
+}
+function assertStartOffset(value, start) {
+  if (typeof start === "number" && start > 0 && start > size(value) - 1)
+    throw new SliceOffsetOutOfBoundsError({
+      offset: start,
+      position: "start",
+      size: size(value)
+    });
+}
+function assertEndOffset(value, start, end) {
+  if (typeof start === "number" && typeof end === "number" && size(value) !== end - start) {
+    throw new SliceOffsetOutOfBoundsError({
+      offset: end,
+      position: "end",
+      size: size(value)
+    });
+  }
+}
+function sliceBytes(value_, start, end, { strict } = {}) {
+  assertStartOffset(value_, start);
+  const value = value_.slice(start, end);
+  if (strict)
+    assertEndOffset(value, start, end);
+  return value;
+}
+function sliceHex(value_, start, end, { strict } = {}) {
+  assertStartOffset(value_, start);
+  const value = `0x${value_.replace("0x", "").slice((start ?? 0) * 2, (end ?? value_.length) * 2)}`;
+  if (strict)
+    assertEndOffset(value, start, end);
+  return value;
+}
+function bytesToBigInt(bytes, opts = {}) {
+  if (typeof opts.size !== "undefined")
+    assertSize(bytes, { size: opts.size });
+  const hex = bytesToHex(bytes);
+  return hexToBigInt(hex, opts);
+}
+function bytesToBool(bytes_, opts = {}) {
+  let bytes = bytes_;
+  if (typeof opts.size !== "undefined") {
+    assertSize(bytes, { size: opts.size });
+    bytes = trim(bytes);
+  }
+  if (bytes.length > 1 || bytes[0] > 1)
+    throw new InvalidBytesBooleanError(bytes);
+  return Boolean(bytes[0]);
+}
+function bytesToNumber(bytes, opts = {}) {
+  if (typeof opts.size !== "undefined")
+    assertSize(bytes, { size: opts.size });
+  const hex = bytesToHex(bytes);
+  return hexToNumber(hex, opts);
+}
+function bytesToString(bytes_, opts = {}) {
+  let bytes = bytes_;
+  if (typeof opts.size !== "undefined") {
+    assertSize(bytes, { size: opts.size });
+    bytes = trim(bytes, { dir: "right" });
+  }
+  return new TextDecoder().decode(bytes);
+}
 function concatHex(values) {
   return `0x${values.reduce((acc, x) => acc + x.replace("0x", ""), "")}`;
+}
+var integerRegex = /^(u?int)(8|16|24|32|40|48|56|64|72|80|88|96|104|112|120|128|136|144|152|160|168|176|184|192|200|208|216|224|232|240|248|256)?$/;
+function encodeAbiParameters(params, values) {
+  if (params.length !== values.length)
+    throw new AbiEncodingLengthMismatchError({
+      expectedLength: params.length,
+      givenLength: values.length
+    });
+  const preparedParams = prepareParams({
+    params,
+    values
+  });
+  return encodeParams(preparedParams);
+}
+function prepareParams({ params, values }) {
+  const preparedParams = [];
+  for (let i = 0;i < params.length; i++) {
+    preparedParams.push(prepareParam({ param: params[i], value: values[i] }));
+  }
+  return preparedParams;
+}
+function prepareParam({ param, value }) {
+  const arrayComponents = getArrayComponents(param.type);
+  if (arrayComponents) {
+    const [length, type] = arrayComponents;
+    return encodeArray(value, { length, param: { ...param, type } });
+  }
+  if (param.type === "tuple") {
+    return encodeTuple(value, {
+      param
+    });
+  }
+  if (param.type === "address") {
+    return encodeAddress(value);
+  }
+  if (param.type === "bool") {
+    return encodeBool(value);
+  }
+  if (param.type.startsWith("uint") || param.type.startsWith("int")) {
+    const signed = param.type.startsWith("int");
+    const [, , size = "256"] = integerRegex.exec(param.type) ?? [];
+    return encodeNumber(value, {
+      signed,
+      size: Number(size)
+    });
+  }
+  if (param.type.startsWith("bytes")) {
+    return encodeBytes(value, { param });
+  }
+  if (param.type === "string") {
+    return encodeString(value);
+  }
+  throw new InvalidAbiEncodingTypeError(param.type, {
+    docsPath: "/docs/contract/encodeAbiParameters"
+  });
+}
+function encodeParams(preparedParams) {
+  let staticSize = 0;
+  for (let i = 0;i < preparedParams.length; i++) {
+    const { dynamic, encoded } = preparedParams[i];
+    if (dynamic)
+      staticSize += 32;
+    else
+      staticSize += size(encoded);
+  }
+  const staticParams = [];
+  const dynamicParams = [];
+  let dynamicSize = 0;
+  for (let i = 0;i < preparedParams.length; i++) {
+    const { dynamic, encoded } = preparedParams[i];
+    if (dynamic) {
+      staticParams.push(numberToHex(staticSize + dynamicSize, { size: 32 }));
+      dynamicParams.push(encoded);
+      dynamicSize += size(encoded);
+    } else {
+      staticParams.push(encoded);
+    }
+  }
+  return concatHex([...staticParams, ...dynamicParams]);
+}
+function encodeAddress(value) {
+  if (!isAddress(value))
+    throw new InvalidAddressError({ address: value });
+  return { dynamic: false, encoded: padHex(value.toLowerCase()) };
+}
+function encodeArray(value, { length, param }) {
+  const dynamic = length === null;
+  if (!Array.isArray(value))
+    throw new InvalidArrayError(value);
+  if (!dynamic && value.length !== length)
+    throw new AbiEncodingArrayLengthMismatchError({
+      expectedLength: length,
+      givenLength: value.length,
+      type: `${param.type}[${length}]`
+    });
+  let dynamicChild = value.length === 0 && isDynamicType(param);
+  const preparedParams = [];
+  for (let i = 0;i < value.length; i++) {
+    const preparedParam = prepareParam({ param, value: value[i] });
+    if (preparedParam.dynamic)
+      dynamicChild = true;
+    preparedParams.push(preparedParam);
+  }
+  if (dynamic || dynamicChild) {
+    const data = encodeParams(preparedParams);
+    if (dynamic) {
+      const length = numberToHex(preparedParams.length, { size: 32 });
+      return {
+        dynamic: true,
+        encoded: concatHex([length, data])
+      };
+    }
+    if (dynamicChild)
+      return { dynamic: true, encoded: data };
+  }
+  return {
+    dynamic: false,
+    encoded: concatHex(preparedParams.map(({ encoded }) => encoded))
+  };
+}
+function encodeBytes(value, { param }) {
+  const [, paramSize] = param.type.split("bytes");
+  const bytesSize = size(value);
+  if (!paramSize) {
+    let value_ = value;
+    if (bytesSize % 32 !== 0)
+      value_ = padHex(value_, {
+        dir: "right",
+        size: Math.ceil((value.length - 2) / 2 / 32) * 32
+      });
+    return {
+      dynamic: true,
+      encoded: concatHex([
+        padHex(numberToHex(bytesSize, { size: 32 })),
+        value_
+      ])
+    };
+  }
+  if (bytesSize !== Number.parseInt(paramSize, 10))
+    throw new AbiEncodingBytesSizeMismatchError({
+      expectedSize: Number.parseInt(paramSize, 10),
+      value
+    });
+  return { dynamic: false, encoded: padHex(value, { dir: "right" }) };
+}
+function encodeBool(value) {
+  if (typeof value !== "boolean")
+    throw new BaseError(`Invalid boolean value: "${value}" (type: ${typeof value}). Expected: \`true\` or \`false\`.`);
+  return { dynamic: false, encoded: padHex(boolToHex(value)) };
+}
+function encodeNumber(value, { signed, size = 256 }) {
+  if (typeof size === "number") {
+    const max = 2n ** (BigInt(size) - (signed ? 1n : 0n)) - 1n;
+    const min = signed ? -max - 1n : 0n;
+    if (value > max || value < min)
+      throw new IntegerOutOfRangeError({
+        max: max.toString(),
+        min: min.toString(),
+        signed,
+        size: size / 8,
+        value: value.toString()
+      });
+  }
+  return {
+    dynamic: false,
+    encoded: numberToHex(value, {
+      size: 32,
+      signed
+    })
+  };
+}
+function encodeString(value) {
+  const hexValue = stringToHex(value);
+  const partsLength = Math.ceil(size(hexValue) / 32);
+  const parts = [];
+  for (let i = 0;i < partsLength; i++) {
+    parts.push(padHex(slice(hexValue, i * 32, (i + 1) * 32), {
+      dir: "right"
+    }));
+  }
+  return {
+    dynamic: true,
+    encoded: concatHex([
+      padHex(numberToHex(size(hexValue), { size: 32 })),
+      ...parts
+    ])
+  };
+}
+function encodeTuple(value, { param }) {
+  let dynamic = false;
+  const preparedParams = [];
+  for (let i = 0;i < param.components.length; i++) {
+    const param_ = param.components[i];
+    const index = Array.isArray(value) ? i : param_.name;
+    const preparedParam = prepareParam({
+      param: param_,
+      value: value[index]
+    });
+    preparedParams.push(preparedParam);
+    if (preparedParam.dynamic)
+      dynamic = true;
+  }
+  return {
+    dynamic,
+    encoded: dynamic ? encodeParams(preparedParams) : concatHex(preparedParams.map(({ encoded }) => encoded))
+  };
+}
+function getArrayComponents(type) {
+  const matches = type.match(/^(.*)\[(\d+)?\]$/);
+  return matches ? [matches[2] ? Number(matches[2]) : null, matches[1]] : undefined;
+}
+function isDynamicType(param) {
+  const { type } = param;
+  if (type === "string")
+    return true;
+  if (type === "bytes")
+    return true;
+  if (type.endsWith("[]"))
+    return true;
+  if (type === "tuple")
+    return param.components.some(isDynamicType);
+  const arrayComponents = getArrayComponents(type);
+  if (arrayComponents)
+    return isDynamicType({ ...param, type: arrayComponents[1] });
+  return false;
+}
+function decodeAbiParameters(params, data) {
+  const bytes = typeof data === "string" ? hexToBytes(data) : data;
+  const cursor = createCursor(bytes);
+  if (size(bytes) === 0 && params.length > 0)
+    throw new AbiDecodingZeroDataError;
+  if (size(data) && size(data) < 32)
+    throw new AbiDecodingDataSizeTooSmallError({
+      data: typeof data === "string" ? data : bytesToHex(data),
+      params,
+      size: size(data)
+    });
+  let consumed = 0;
+  const values = [];
+  for (let i = 0;i < params.length; ++i) {
+    const param = params[i];
+    if (consumed < bytes.length)
+      cursor.setPosition(consumed);
+    const [data, consumed_] = decodeParameter(cursor, param, {
+      staticPosition: 0
+    });
+    consumed += consumed_;
+    values.push(data);
+  }
+  return values;
+}
+function decodeParameter(cursor, param, { staticPosition }) {
+  const arrayComponents = getArrayComponents(param.type);
+  if (arrayComponents) {
+    const [length, type] = arrayComponents;
+    return decodeArray(cursor, { ...param, type }, { length, staticPosition });
+  }
+  if (param.type === "tuple")
+    return decodeTuple(cursor, param, { staticPosition });
+  if (param.type === "address")
+    return decodeAddress(cursor);
+  if (param.type === "bool")
+    return decodeBool(cursor);
+  if (param.type.startsWith("bytes"))
+    return decodeBytes(cursor, param, { staticPosition });
+  if (param.type.startsWith("uint") || param.type.startsWith("int"))
+    return decodeNumber(cursor, param);
+  if (param.type === "string")
+    return decodeString(cursor, { staticPosition });
+  throw new InvalidAbiDecodingTypeError(param.type, {
+    docsPath: "/docs/contract/decodeAbiParameters"
+  });
+}
+var sizeOfLength = 32;
+var sizeOfOffset = 32;
+function decodeAddress(cursor) {
+  const value = cursor.readBytes(32);
+  return [checksumAddress(bytesToHex(sliceBytes(value, -20))), 32];
+}
+function decodeArray(cursor, param, { length, staticPosition }) {
+  if (length === null) {
+    const offset = bytesToNumber(cursor.readBytes(sizeOfOffset));
+    const start = staticPosition + offset;
+    const startOfData = start + sizeOfLength;
+    cursor.setPosition(start);
+    const length = bytesToNumber(cursor.readBytes(sizeOfLength));
+    const dynamicChild = hasDynamicChild(param);
+    let consumed = 0;
+    const value = [];
+    for (let i = 0;i < length; ++i) {
+      cursor.setPosition(startOfData + (dynamicChild ? i * 32 : consumed));
+      const [data, consumed_] = decodeParameter(cursor, param, {
+        staticPosition: startOfData
+      });
+      consumed += consumed_;
+      value.push(data);
+      if (consumed_ === 0) {
+        cursor.assertReadLimit();
+        cursor._touch();
+      }
+    }
+    cursor.setPosition(staticPosition + 32);
+    return [value, 32];
+  }
+  if (hasDynamicChild(param)) {
+    const offset = bytesToNumber(cursor.readBytes(sizeOfOffset));
+    const start = staticPosition + offset;
+    const value = [];
+    for (let i = 0;i < length; ++i) {
+      cursor.setPosition(start + i * 32);
+      const [data] = decodeParameter(cursor, param, {
+        staticPosition: start
+      });
+      value.push(data);
+    }
+    cursor.setPosition(staticPosition + 32);
+    return [value, 32];
+  }
+  let consumed = 0;
+  const value = [];
+  for (let i = 0;i < length; ++i) {
+    const [data, consumed_] = decodeParameter(cursor, param, {
+      staticPosition: staticPosition + consumed
+    });
+    consumed += consumed_;
+    value.push(data);
+    if (consumed_ === 0) {
+      cursor.assertReadLimit();
+      cursor._touch();
+    }
+  }
+  return [value, consumed];
+}
+function decodeBool(cursor) {
+  return [bytesToBool(cursor.readBytes(32), { size: 32 }), 32];
+}
+function decodeBytes(cursor, param, { staticPosition }) {
+  const [_, size] = param.type.split("bytes");
+  if (!size) {
+    const offset = bytesToNumber(cursor.readBytes(32));
+    cursor.setPosition(staticPosition + offset);
+    const length = bytesToNumber(cursor.readBytes(32));
+    if (length === 0) {
+      cursor.setPosition(staticPosition + 32);
+      return ["0x", 32];
+    }
+    const data = cursor.readBytes(length);
+    cursor.setPosition(staticPosition + 32);
+    return [bytesToHex(data), 32];
+  }
+  const value = bytesToHex(cursor.readBytes(Number.parseInt(size, 10), 32));
+  return [value, 32];
+}
+function decodeNumber(cursor, param) {
+  const signed = param.type.startsWith("int");
+  const size = Number.parseInt(param.type.split("int")[1] || "256", 10);
+  const value = cursor.readBytes(32);
+  return [
+    size > 48 ? bytesToBigInt(value, { signed }) : bytesToNumber(value, { signed }),
+    32
+  ];
+}
+function decodeTuple(cursor, param, { staticPosition }) {
+  const hasUnnamedChild = param.components.length === 0 || param.components.some(({ name }) => !name);
+  const value = hasUnnamedChild ? [] : {};
+  let consumed = 0;
+  if (hasDynamicChild(param)) {
+    const offset = bytesToNumber(cursor.readBytes(sizeOfOffset));
+    const start = staticPosition + offset;
+    for (let i = 0;i < param.components.length; ++i) {
+      const component = param.components[i];
+      cursor.setPosition(start + consumed);
+      const [data, consumed_] = decodeParameter(cursor, component, {
+        staticPosition: start
+      });
+      consumed += consumed_;
+      value[hasUnnamedChild ? i : component?.name] = data;
+    }
+    cursor.setPosition(staticPosition + 32);
+    return [value, 32];
+  }
+  for (let i = 0;i < param.components.length; ++i) {
+    const component = param.components[i];
+    const [data, consumed_] = decodeParameter(cursor, component, {
+      staticPosition
+    });
+    value[hasUnnamedChild ? i : component?.name] = data;
+    consumed += consumed_;
+  }
+  return [value, consumed];
+}
+function decodeString(cursor, { staticPosition }) {
+  const offset = bytesToNumber(cursor.readBytes(32));
+  const start = staticPosition + offset;
+  cursor.setPosition(start);
+  const length = bytesToNumber(cursor.readBytes(32));
+  if (length === 0) {
+    cursor.setPosition(staticPosition + 32);
+    return ["", 32];
+  }
+  const data = cursor.readBytes(length, 32);
+  const value = bytesToString(data);
+  cursor.setPosition(staticPosition + 32);
+  return [value, 32];
+}
+function hasDynamicChild(param) {
+  const { type } = param;
+  if (type === "string")
+    return true;
+  if (type === "bytes")
+    return true;
+  if (type.endsWith("[]"))
+    return true;
+  if (type === "tuple")
+    return param.components?.some(hasDynamicChild);
+  const arrayComponents = getArrayComponents(param.type);
+  if (arrayComponents && hasDynamicChild({ ...param, type: arrayComponents[1] }))
+    return true;
+  return false;
+}
+var docsPath = "/docs/contract/decodeEventLog";
+function decodeEventLog(parameters) {
+  const { abi, data, strict: strict_, topics } = parameters;
+  const strict = strict_ ?? true;
+  const [signature, ...argTopics] = topics;
+  if (!signature)
+    throw new AbiEventSignatureEmptyTopicsError({ docsPath });
+  const abiItem = abi.find((x) => x.type === "event" && signature === toEventSelector(formatAbiItem(x)));
+  if (!(abiItem && ("name" in abiItem)) || abiItem.type !== "event")
+    throw new AbiEventSignatureNotFoundError(signature, { docsPath });
+  const { name, inputs } = abiItem;
+  const isUnnamed = inputs?.some((x) => !(("name" in x) && x.name));
+  const args = isUnnamed ? [] : {};
+  const indexedInputs = inputs.map((x, i) => [x, i]).filter(([x]) => ("indexed" in x) && x.indexed);
+  const missingIndexedInputs = [];
+  for (let i = 0;i < indexedInputs.length; i++) {
+    const [param, argIndex] = indexedInputs[i];
+    const topic = argTopics[i];
+    if (!topic) {
+      if (strict)
+        throw new DecodeLogTopicsMismatch({
+          abiItem,
+          param
+        });
+      missingIndexedInputs.push([param, argIndex]);
+      continue;
+    }
+    args[isUnnamed ? argIndex : param.name || argIndex] = decodeTopic({
+      param,
+      value: topic
+    });
+  }
+  const nonIndexedInputs = inputs.filter((x) => !(("indexed" in x) && x.indexed));
+  const inputsToDecode = strict ? nonIndexedInputs : [...missingIndexedInputs.map(([param]) => param), ...nonIndexedInputs];
+  if (inputsToDecode.length > 0) {
+    if (data && data !== "0x") {
+      try {
+        const decodedData = decodeAbiParameters(inputsToDecode, data);
+        if (decodedData) {
+          let dataIndex = 0;
+          if (!strict) {
+            for (const [param, argIndex] of missingIndexedInputs) {
+              args[isUnnamed ? argIndex : param.name || argIndex] = decodedData[dataIndex++];
+            }
+          }
+          if (isUnnamed) {
+            for (let i = 0;i < inputs.length; i++)
+              if (args[i] === undefined && dataIndex < decodedData.length)
+                args[i] = decodedData[dataIndex++];
+          } else
+            for (let i = 0;i < nonIndexedInputs.length; i++)
+              args[nonIndexedInputs[i].name] = decodedData[dataIndex++];
+        }
+      } catch (err) {
+        if (strict) {
+          if (err instanceof AbiDecodingDataSizeTooSmallError || err instanceof PositionOutOfBoundsError)
+            throw new DecodeLogDataMismatch({
+              abiItem,
+              data,
+              params: inputsToDecode,
+              size: size(data)
+            });
+          throw err;
+        }
+      }
+    } else if (strict) {
+      throw new DecodeLogDataMismatch({
+        abiItem,
+        data: "0x",
+        params: inputsToDecode,
+        size: 0
+      });
+    }
+  }
+  return {
+    eventName: name,
+    args: Object.values(args).length > 0 ? args : undefined
+  };
+}
+function decodeTopic({ param, value }) {
+  if (param.type === "string" || param.type === "bytes" || param.type === "tuple" || param.type.match(/^(.*)\[(\d+)?\]$/))
+    return value;
+  const decodedArg = decodeAbiParameters([param], value) || [];
+  return decodedArg[0];
+}
+var toFunctionSelector = (fn) => slice(toSignatureHash(fn), 0, 4);
+function getAbiItem(parameters) {
+  const { abi, args = [], name } = parameters;
+  const isSelector = isHex(name, { strict: false });
+  const abiItems = abi.filter((abiItem) => {
+    if (isSelector) {
+      if (abiItem.type === "function")
+        return toFunctionSelector(abiItem) === name;
+      if (abiItem.type === "event")
+        return toEventSelector(abiItem) === name;
+      return false;
+    }
+    return "name" in abiItem && abiItem.name === name;
+  });
+  if (abiItems.length === 0)
+    return;
+  if (abiItems.length === 1)
+    return abiItems[0];
+  let matchedAbiItem;
+  for (const abiItem of abiItems) {
+    if (!("inputs" in abiItem))
+      continue;
+    if (!args || args.length === 0) {
+      if (!abiItem.inputs || abiItem.inputs.length === 0)
+        return abiItem;
+      continue;
+    }
+    if (!abiItem.inputs)
+      continue;
+    if (abiItem.inputs.length === 0)
+      continue;
+    if (abiItem.inputs.length !== args.length)
+      continue;
+    const matched = args.every((arg, index) => {
+      const abiParameter = "inputs" in abiItem && abiItem.inputs[index];
+      if (!abiParameter)
+        return false;
+      return isArgOfType(arg, abiParameter);
+    });
+    if (matched) {
+      if (matchedAbiItem && "inputs" in matchedAbiItem && matchedAbiItem.inputs) {
+        const ambiguousTypes = getAmbiguousTypes(abiItem.inputs, matchedAbiItem.inputs, args);
+        if (ambiguousTypes)
+          throw new AbiItemAmbiguityError({
+            abiItem,
+            type: ambiguousTypes[0]
+          }, {
+            abiItem: matchedAbiItem,
+            type: ambiguousTypes[1]
+          });
+      }
+      matchedAbiItem = abiItem;
+    }
+  }
+  if (matchedAbiItem)
+    return matchedAbiItem;
+  return abiItems[0];
+}
+function isArgOfType(arg, abiParameter) {
+  const argType = typeof arg;
+  const abiParameterType = abiParameter.type;
+  switch (abiParameterType) {
+    case "address":
+      return isAddress(arg, { strict: false });
+    case "bool":
+      return argType === "boolean";
+    case "function":
+      return argType === "string";
+    case "string":
+      return argType === "string";
+    default: {
+      if (abiParameterType === "tuple" && "components" in abiParameter)
+        return Object.values(abiParameter.components).every((component, index) => {
+          return argType === "object" && isArgOfType(getComponentValue(arg, component, index), component);
+        });
+      if (/^u?int(8|16|24|32|40|48|56|64|72|80|88|96|104|112|120|128|136|144|152|160|168|176|184|192|200|208|216|224|232|240|248|256)?$/.test(abiParameterType))
+        return argType === "number" || argType === "bigint";
+      if (/^bytes([1-9]|1[0-9]|2[0-9]|3[0-2])?$/.test(abiParameterType))
+        return argType === "string" || arg instanceof Uint8Array;
+      const arrayComponents = getArrayComponents(abiParameterType);
+      if (arrayComponents) {
+        const [length, type] = arrayComponents;
+        return Array.isArray(arg) && (length === null || arg.length === length) && arg.every((x) => isArgOfType(x, { ...abiParameter, type }));
+      }
+      return false;
+    }
+  }
+}
+function getAmbiguousTypes(sourceParameters, targetParameters, args) {
+  for (const parameterIndex in sourceParameters) {
+    const sourceParameter = sourceParameters[parameterIndex];
+    const targetParameter = targetParameters[parameterIndex];
+    if (!targetParameter)
+      continue;
+    if (sourceParameter.type === "tuple" && targetParameter.type === "tuple" && "components" in sourceParameter && "components" in targetParameter) {
+      const value = args[parameterIndex];
+      const types = getAmbiguousTypes(sourceParameter.components, targetParameter.components, sourceParameter.components.map((component, index) => getComponentValue(value, component, index)));
+      if (types)
+        return types;
+      continue;
+    }
+    const sourceArray = getArrayComponents(sourceParameter.type);
+    const targetArray = getArrayComponents(targetParameter.type);
+    if (sourceArray && targetArray) {
+      const types = getAmbiguousTypes([{ ...sourceParameter, type: sourceArray[1] }], [{ ...targetParameter, type: targetArray[1] }], [args[parameterIndex]?.[0]]);
+      if (types)
+        return types;
+      continue;
+    }
+    const types = [sourceParameter.type, targetParameter.type];
+    const value = args[parameterIndex];
+    const ambiguous = (() => {
+      if (types.includes("address") && types.includes("bytes20"))
+        return true;
+      if (types.includes("address") && (types.includes("string") || types.includes("bytes")))
+        return value === undefined || isAddress(value, { strict: false });
+      return false;
+    })();
+    if (ambiguous)
+      return types;
+  }
+  return;
+}
+function getComponentValue(arg, component, index) {
+  if (Array.isArray(arg))
+    return arg[index];
+  return arg?.[component.name];
+}
+var docsPath2 = "/docs/contract/decodeFunctionResult";
+function decodeFunctionResult(parameters) {
+  const { abi, args, functionName, data } = parameters;
+  let abiItem = abi[0];
+  if (functionName) {
+    const item = getAbiItem({ abi, args, name: functionName });
+    if (!item)
+      throw new AbiFunctionNotFoundError(functionName, { docsPath: docsPath2 });
+    abiItem = item;
+  }
+  if (abiItem.type !== "function")
+    throw new AbiFunctionNotFoundError(undefined, { docsPath: docsPath2 });
+  if (!abiItem.outputs)
+    throw new AbiFunctionOutputsNotFoundError(abiItem.name, { docsPath: docsPath2 });
+  const values = decodeAbiParameters(abiItem.outputs, data);
+  if (values && values.length > 1)
+    return values;
+  if (values && values.length === 1)
+    return values[0];
+  return;
+}
+
+class FilterTypeNotSupportedError extends BaseError {
+  constructor(type) {
+    super(`Filter type "${type}" is not supported.`, {
+      name: "FilterTypeNotSupportedError"
+    });
+  }
+}
+var docsPath3 = "/docs/contract/encodeEventTopics";
+function encodeEventTopics(parameters) {
+  const { abi, eventName, args } = parameters;
+  let abiItem = abi[0];
+  if (eventName) {
+    const item = getAbiItem({ abi, name: eventName });
+    if (!item)
+      throw new AbiEventNotFoundError(eventName, { docsPath: docsPath3 });
+    abiItem = item;
+  }
+  if (abiItem.type !== "event")
+    throw new AbiEventNotFoundError(undefined, { docsPath: docsPath3 });
+  let topics = [];
+  if (args && "inputs" in abiItem) {
+    const indexedInputs = abiItem.inputs?.filter((param) => ("indexed" in param) && param.indexed);
+    const args_ = Array.isArray(args) ? args : Object.values(args).length > 0 ? indexedInputs?.map((x) => args[x.name]) ?? [] : [];
+    if (args_.length > 0) {
+      topics = indexedInputs?.map((param, i) => {
+        if (Array.isArray(args_[i]))
+          return args_[i].map((_, j) => encodeArg({ param, value: args_[i][j] }));
+        return typeof args_[i] !== "undefined" && args_[i] !== null ? encodeArg({ param, value: args_[i] }) : null;
+      }) ?? [];
+    }
+  }
+  if (abiItem.anonymous)
+    return topics;
+  const definition = formatAbiItem(abiItem);
+  const signature = toEventSelector(definition);
+  return [signature, ...topics];
+}
+function encodeArg({ param, value }) {
+  if (param.type === "string")
+    return keccak256(stringToBytes(value));
+  if (param.type === "bytes")
+    return keccak256(toBytes(value));
+  if (param.type === "tuple" || param.type.match(/^(.*)\[(\d+)?\]$/))
+    throw new FilterTypeNotSupportedError(param.type);
+  return encodeAbiParameters([param], [value]);
+}
+var docsPath4 = "/docs/contract/encodeFunctionData";
+function prepareEncodeFunctionData(parameters) {
+  const { abi, args, functionName } = parameters;
+  let abiItem = abi[0];
+  if (functionName) {
+    const item = getAbiItem({
+      abi,
+      args,
+      name: functionName
+    });
+    if (!item)
+      throw new AbiFunctionNotFoundError(functionName, { docsPath: docsPath4 });
+    abiItem = item;
+  }
+  if (abiItem.type !== "function")
+    throw new AbiFunctionNotFoundError(undefined, { docsPath: docsPath4 });
+  return {
+    abi: [abiItem],
+    functionName: toFunctionSelector(formatAbiItem(abiItem))
+  };
+}
+function encodeFunctionData(parameters) {
+  const { args } = parameters;
+  const { abi, functionName } = (() => {
+    if (parameters.abi.length === 1 && parameters.functionName?.startsWith("0x"))
+      return parameters;
+    return prepareEncodeFunctionData(parameters);
+  })();
+  const abiItem = abi[0];
+  const signature = functionName;
+  const data = "inputs" in abiItem && abiItem.inputs ? encodeAbiParameters(abiItem.inputs, args ?? []) : undefined;
+  return concatHex([signature, data ?? "0x"]);
 }
 function publicKeyToAddress(publicKey) {
   const address = keccak256(`0x${publicKey.substring(4)}`).substring(26);
@@ -7299,9 +8716,342 @@ class Report {
     return this.report;
   }
 }
+var hexToBytes3 = (hexStr) => {
+  if (!hexStr.startsWith("0x")) {
+    throw new Error(`Invalid hex string: ${hexStr}`);
+  }
+  if (!/^0x[0-9a-fA-F]*$/.test(hexStr)) {
+    throw new Error(`Invalid hex string: ${hexStr}`);
+  }
+  if ((hexStr.length - 2) % 2 !== 0) {
+    throw new Error(`Hex string must have an even number of characters: ${hexStr}`);
+  }
+  const hex = hexStr.slice(2);
+  const bytes = new Uint8Array(hex.length / 2);
+  for (let i = 0;i < hex.length; i += 2) {
+    bytes[i / 2] = Number.parseInt(hex.slice(i, i + 2), 16);
+  }
+  return bytes;
+};
+var bytesToHex3 = (bytes) => {
+  return `0x${Array.from(bytes).map((b) => b.toString(16).padStart(2, "0")).join("")}`;
+};
 var bytesToBase64 = (bytes) => {
   return Buffer.from(bytes).toString("base64");
 };
+var hexToBase64 = (hex) => {
+  const cleanHex = hex.startsWith("0x") ? hex.slice(2) : hex;
+  if (cleanHex.length === 0) {
+    return "";
+  }
+  if (cleanHex.length % 2 !== 0) {
+    throw new Error(`Hex string must have an even number of characters: ${hex}`);
+  }
+  if (!/^[0-9a-fA-F]*$/.test(cleanHex)) {
+    throw new Error(`Invalid hex string: ${hex}`);
+  }
+  return Buffer.from(cleanHex, "hex").toString("base64");
+};
+function createWriteCreReportRequest(input) {
+  return {
+    receiver: hexToBytes3(input.receiver),
+    report: input.report,
+    gasConfig: input.gasConfig !== undefined ? fromJson(GasConfigSchema, input.gasConfig) : undefined,
+    $report: true
+  };
+}
+function x_generatedCodeOnly_unwrap_WriteCreReportRequest(input) {
+  return create(WriteReportRequestSchema, {
+    receiver: input.receiver,
+    report: input.report !== undefined ? input.report.x_generatedCodeOnly_unwrap() : undefined,
+    gasConfig: input.gasConfig
+  });
+}
+
+class ClientCapability {
+  ChainSelector;
+  static CAPABILITY_ID = "evm@1.0.0";
+  static CAPABILITY_NAME = "evm";
+  static CAPABILITY_VERSION = "1.0.0";
+  static SUPPORTED_CHAIN_SELECTORS = {
+    "adi-mainnet": 4059281736450291836n,
+    "adi-testnet": 9418205736192840573n,
+    "apechain-testnet-curtis": 9900119385908781505n,
+    "arc-testnet": 3034092155422581607n,
+    "avalanche-mainnet": 6433500567565415381n,
+    "avalanche-testnet-fuji": 14767482510784806043n,
+    "binance_smart_chain-mainnet": 11344663589394136015n,
+    "binance_smart_chain-testnet": 13264668187771770619n,
+    "celo-mainnet": 1346049177634351622n,
+    "celo-sepolia": 3761762704474186180n,
+    "cronos-testnet": 2995292832068775165n,
+    "dtcc-mainnet-appchain": 13879014182901017172n,
+    "dtcc-testnet-andesite": 15513093881969820114n,
+    "ethereum-mainnet": 5009297550715157269n,
+    "ethereum-mainnet-arbitrum-1": 4949039107694359620n,
+    "ethereum-mainnet-base-1": 15971525489660198786n,
+    "ethereum-mainnet-ink-1": 3461204551265785888n,
+    "ethereum-mainnet-linea-1": 4627098889531055414n,
+    "ethereum-mainnet-mantle-1": 1556008542357238666n,
+    "ethereum-mainnet-optimism-1": 3734403246176062136n,
+    "ethereum-mainnet-scroll-1": 13204309965629103672n,
+    "ethereum-mainnet-worldchain-1": 2049429975587534727n,
+    "ethereum-mainnet-xlayer-1": 3016212468291539606n,
+    "ethereum-mainnet-zksync-1": 1562403441176082196n,
+    "ethereum-testnet-hoodi": 10380998176179737091n,
+    "ethereum-testnet-sepolia": 16015286601757825753n,
+    "ethereum-testnet-sepolia-arbitrum-1": 3478487238524512106n,
+    "ethereum-testnet-sepolia-base-1": 10344971235874465080n,
+    "ethereum-testnet-sepolia-linea-1": 5719461335882077547n,
+    "ethereum-testnet-sepolia-mantle-1": 8236463271206331221n,
+    "ethereum-testnet-sepolia-optimism-1": 5224473277236331295n,
+    "ethereum-testnet-sepolia-scroll-1": 2279865765895943307n,
+    "ethereum-testnet-sepolia-unichain-1": 14135854469784514356n,
+    "ethereum-testnet-sepolia-worldchain-1": 5299555114858065850n,
+    "ethereum-testnet-sepolia-zksync-1": 6898391096552792247n,
+    "gnosis_chain-mainnet": 465200170687744372n,
+    "gnosis_chain-testnet-chiado": 8871595565390010547n,
+    "hyperliquid-mainnet": 2442541497099098535n,
+    "hyperliquid-testnet": 4286062357653186312n,
+    "ink-testnet-sepolia": 9763904284804119144n,
+    "jovay-mainnet": 1523760397290643893n,
+    "jovay-testnet": 945045181441419236n,
+    "megaeth-mainnet": 6093540873831549674n,
+    "megaeth-testnet-2": 18241817625092392675n,
+    "monad-mainnet": 8481857512324358265n,
+    "monad-testnet": 2183018362218727504n,
+    "pharos-atlantic-testnet": 16098325658947243212n,
+    "pharos-mainnet": 7801139999541420232n,
+    "plasma-mainnet": 9335212494177455608n,
+    "plasma-testnet": 3967220077692964309n,
+    "polygon-mainnet": 4051577828743386545n,
+    "polygon-testnet-amoy": 16281711391670634445n,
+    "private-testnet-andesite": 6915682381028791124n,
+    "private-testnet-basalt": 18362000170840307455n,
+    "private-testnet-pumice": 1564738277398880633n,
+    "private-testnet-quartzite": 4175996748267305081n,
+    "private-testnet-rhyolite": 604447335222770945n,
+    "robinhood-testnet": 2032988798112970440n,
+    "sonic-mainnet": 1673871237479749969n,
+    "sonic-testnet": 1763698235108410440n,
+    "stable-testnet": 11793402411494852765n,
+    "t-rex-testnet": 17611928792452358269n,
+    "tac-testnet": 9488606126177218005n,
+    "tempo-testnet-moderato": 8457817439310187923n,
+    "xlayer-testnet": 10212741611335999305n
+  };
+  constructor(ChainSelector) {
+    this.ChainSelector = ChainSelector;
+  }
+  callContract(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(CallContractRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "CallContract",
+      payload,
+      inputSchema: CallContractRequestSchema,
+      outputSchema: CallContractReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  filterLogs(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(FilterLogsRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "FilterLogs",
+      payload,
+      inputSchema: FilterLogsRequestSchema,
+      outputSchema: FilterLogsReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  balanceAt(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(BalanceAtRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "BalanceAt",
+      payload,
+      inputSchema: BalanceAtRequestSchema,
+      outputSchema: BalanceAtReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  estimateGas(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(EstimateGasRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "EstimateGas",
+      payload,
+      inputSchema: EstimateGasRequestSchema,
+      outputSchema: EstimateGasReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getTransactionByHash(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetTransactionByHashRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetTransactionByHash",
+      payload,
+      inputSchema: GetTransactionByHashRequestSchema,
+      outputSchema: GetTransactionByHashReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  getTransactionReceipt(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(GetTransactionReceiptRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "GetTransactionReceipt",
+      payload,
+      inputSchema: GetTransactionReceiptRequestSchema,
+      outputSchema: GetTransactionReceiptReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  headerByNumber(runtime, input) {
+    let payload;
+    if (input.$typeName) {
+      payload = input;
+    } else {
+      payload = fromJson(HeaderByNumberRequestSchema, input);
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "HeaderByNumber",
+      payload,
+      inputSchema: HeaderByNumberRequestSchema,
+      outputSchema: HeaderByNumberReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+  logTrigger(config) {
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    return new ClientLogTrigger(config, capabilityId, "LogTrigger", this.ChainSelector);
+  }
+  writeReport(runtime, input) {
+    let payload;
+    if (input.$report) {
+      payload = x_generatedCodeOnly_unwrap_WriteCreReportRequest(input);
+    } else {
+      payload = x_generatedCodeOnly_unwrap_WriteCreReportRequest(createWriteCreReportRequest(input));
+    }
+    const capabilityId = `${ClientCapability.CAPABILITY_NAME}:ChainSelector:${this.ChainSelector}@${ClientCapability.CAPABILITY_VERSION}`;
+    const capabilityResponse = runtime.callCapability({
+      capabilityId,
+      method: "WriteReport",
+      payload,
+      inputSchema: WriteReportRequestSchema,
+      outputSchema: WriteReportReplySchema
+    });
+    return {
+      result: () => {
+        const result = capabilityResponse.result();
+        return result;
+      }
+    };
+  }
+}
+
+class ClientLogTrigger {
+  _capabilityId;
+  _method;
+  ChainSelector;
+  config;
+  constructor(config, _capabilityId, _method, ChainSelector) {
+    this._capabilityId = _capabilityId;
+    this._method = _method;
+    this.ChainSelector = ChainSelector;
+    this.config = config.$typeName ? config : fromJson(FilterLogTriggerRequestSchema, config);
+  }
+  capabilityId() {
+    return this._capabilityId;
+  }
+  method() {
+    return this._method;
+  }
+  outputSchema() {
+    return LogSchema;
+  }
+  configAsAny() {
+    return anyPack(FilterLogTriggerRequestSchema, this.config);
+  }
+  adapt(rawOutput) {
+    return rawOutput;
+  }
+}
 var EncodingType;
 (function(EncodingType) {
   EncodingType[EncodingType["NONE"] = 0] = "NONE";
@@ -7361,7 +9111,7 @@ class SendRequester {
   }
 }
 
-class ClientCapability {
+class ClientCapability2 {
   static CAPABILITY_ID = "http-actions@1.0.0-alpha";
   static CAPABILITY_NAME = "http-actions";
   static CAPABILITY_VERSION = "1.0.0-alpha";
@@ -7380,7 +9130,7 @@ class ClientCapability {
     } else {
       payload = fromJson(RequestSchema, input);
     }
-    const capabilityId = ClientCapability.CAPABILITY_ID;
+    const capabilityId = ClientCapability2.CAPABILITY_ID;
     const capabilityResponse = runtime.callCapability({
       capabilityId,
       method: "SendRequest",
@@ -12966,6 +14716,10 @@ function assertSafeIntegerNumber(value, label) {
     throw new Error(`${label} requires a safe integer number, received ${value}. Pass a bigint or string for larger values`);
   }
 }
+var prepareReportRequestFromBytes = (payload, reportEncoder) => ({
+  encodedPayload: bytesToBase64(payload),
+  ...reportEncoder
+});
 var LAST_FINALIZED_BLOCK_NUMBER = {
   absVal: Buffer.from([3]).toString("base64"),
   sign: "-1"
@@ -12974,6 +14728,26 @@ var LATEST_BLOCK_NUMBER = {
   absVal: Buffer.from([2]).toString("base64"),
   sign: "-1"
 };
+var encodeCallMsg = (payload) => {
+  const encodeField = (fieldName, value) => {
+    try {
+      return hexToBase64(value);
+    } catch (e) {
+      throw new Error(`Invalid hex in '${fieldName}' field of CallMsg: ${e instanceof Error ? e.message : String(e)}`);
+    }
+  };
+  return {
+    from: encodeField("from", payload.from),
+    to: encodeField("to", payload.to),
+    data: encodeField("data", payload.data)
+  };
+};
+var EVM_DEFAULT_REPORT_ENCODER = {
+  encoderName: "evm",
+  signingAlgo: "ecdsa",
+  hashingAlgo: "keccak256"
+};
+var prepareReportRequest = (hexEncodedPayload, reportEncoder = EVM_DEFAULT_REPORT_ENCODER) => prepareReportRequestFromBytes(hexToBytes3(hexEncodedPayload), reportEncoder);
 var SOLANA_ERROR__BLOCK_HEIGHT_EXCEEDED = 1;
 var SOLANA_ERROR__INVALID_NONCE = 2;
 var SOLANA_ERROR__NONCE_ACCOUNT_NOT_FOUND = 3;
@@ -13826,6 +15600,28 @@ var U64_SIGN_BIT = 1n << 63n;
 var UTF8_ENCODER = new TextEncoder;
 var ANCHOR_CPI_METHOD_NAME = "anchor:event";
 var ANCHOR_CPI_METHOD_NAME_B64 = bytesToBase64(UTF8_ENCODER.encode(ANCHOR_CPI_METHOD_NAME));
+var decodeJson = (input) => {
+  const decoder = new TextDecoder("utf-8");
+  const textBody = decoder.decode(input);
+  return JSON.parse(textBody);
+};
+function json(responseOrFn) {
+  if (typeof responseOrFn === "function") {
+    return {
+      result: () => json(responseOrFn().result)
+    };
+  }
+  return decodeJson(responseOrFn.body);
+}
+function ok(responseOrFn) {
+  if (typeof responseOrFn === "function") {
+    return {
+      result: () => ok(responseOrFn().result)
+    };
+  } else {
+    return responseOrFn.statusCode >= 200 && responseOrFn.statusCode < 300;
+  }
+}
 function sendReport(runtime, report, fn) {
   const rawReport = report.x_generatedCodeOnly_unwrap();
   const request = fn(rawReport);
@@ -13836,7 +15632,7 @@ function sendRequesterSendReport(report, fn) {
   const request = fn(rawReport);
   return this.sendRequest(request);
 }
-ClientCapability.prototype.sendReport = sendReport;
+ClientCapability2.prototype.sendReport = sendReport;
 SendRequester.prototype.sendReport = sendRequesterSendReport;
 var network = {
   chainId: "1",
@@ -18182,6 +19978,7 @@ var defaultLookup = new NetworkLookup({
   testnetBySelector,
   testnetBySelectorByFamily
 });
+var getNetwork = (options) => defaultLookup.find(options);
 
 class Int64 {
   static INT64_MIN = -(2n ** 63n);
@@ -18507,6 +20304,33 @@ function unwrap(value) {
 }
 function isValueProto(value) {
   return value != null && typeof value.$typeName === "string" && value.$typeName === "values.v1.Value";
+}
+function consensusMedianAggregation() {
+  return simpleConsensus(AggregationType.MEDIAN);
+}
+
+class ConsensusImpl {
+  descriptor;
+  defaultValue;
+  constructor(descriptor, defaultValue) {
+    this.descriptor = descriptor;
+    this.defaultValue = defaultValue;
+  }
+  withDefault(t) {
+    return new ConsensusImpl(this.descriptor, t);
+  }
+  _usesUToForceShape(_) {}
+}
+function simpleConsensus(agg) {
+  return new ConsensusImpl(simpleDescriptor(agg));
+}
+function simpleDescriptor(agg) {
+  return create(ConsensusDescriptorSchema, {
+    descriptor: {
+      case: "aggregation",
+      value: agg
+    }
+  });
 }
 async function standardValidate(schema, input) {
   let result = schema["~standard"].validate(input);
@@ -19261,15 +21085,244 @@ var sendErrorResponse = (error) => {
   }
   hostBindings.sendResponse(payload);
 };
+var encodeTopicValue = (t) => {
+  if (t == null)
+    return [];
+  if (Array.isArray(t))
+    return t.map(hexToBase64);
+  return [hexToBase64(t)];
+};
+var CommitOrBurnABI = [{ type: "constructor", inputs: [], stateMutability: "nonpayable" }, { type: "function", name: "UNIT", inputs: [], outputs: [{ name: "", type: "uint256", internalType: "uint256" }], stateMutability: "view" }, { type: "function", name: "deposit", inputs: [{ name: "_githubId", type: "string", internalType: "string" }], outputs: [], stateMutability: "payable" }, { type: "function", name: "getRoundInfo", inputs: [{ name: "_roundId", type: "uint256", internalType: "uint256" }], outputs: [{ name: "", type: "tuple", internalType: "structCommitOrBurn.Round", components: [{ name: "startTime", type: "uint256", internalType: "uint256" }, { name: "endTime", type: "uint256", internalType: "uint256" }, { name: "totalDeposited", type: "uint256", internalType: "uint256" }, { name: "totalShares", type: "uint256", internalType: "uint256" }, { name: "resolved", type: "bool", internalType: "bool" }] }], stateMutability: "view" }, { type: "function", name: "getUserInfo", inputs: [{ name: "_user", type: "address", internalType: "address" }], outputs: [{ name: "", type: "tuple", internalType: "structCommitOrBurn.User", components: [{ name: "githubId", type: "string", internalType: "string" }, { name: "roundId", type: "uint256", internalType: "uint256" }, { name: "shares", type: "uint256", internalType: "uint256" }] }], stateMutability: "view" }, { type: "function", name: "getUsersByRound", inputs: [{ name: "_roundId", type: "uint256", internalType: "uint256" }], outputs: [{ name: "", type: "string[]", internalType: "string[]" }], stateMutability: "view" }, { type: "function", name: "s_currentRound", inputs: [], outputs: [{ name: "", type: "uint256", internalType: "uint256" }], stateMutability: "view" }, { type: "event", name: "Deposited", inputs: [{ name: "user", type: "address", indexed: true, internalType: "address" }, { name: "roundId", type: "uint256", indexed: true, internalType: "uint256" }, { name: "githubId", type: "string", indexed: true, internalType: "string" }, { name: "shares", type: "uint256", indexed: false, internalType: "uint256" }], anonymous: false }, { type: "error", name: "CommitOrBurn__CantEnterSameRound", inputs: [] }, { type: "error", name: "CommitOrBurn__GithubIdIsNotExist", inputs: [] }, { type: "error", name: "CommitOrBurn__MustSendMoreThanOne", inputs: [] }, { type: "error", name: "CommitOrBurn__MustSendMultipleOfUNIT", inputs: [] }];
+
+class CommitOrBurn {
+  client;
+  address;
+  constructor(client, address) {
+    this.client = client;
+    this.address = address;
+  }
+  uNIT(runtime) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "UNIT"
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "UNIT",
+      data: bytesToHex3(result.data)
+    });
+  }
+  getRoundInfo(runtime, roundId) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "getRoundInfo",
+      args: [roundId]
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "getRoundInfo",
+      data: bytesToHex3(result.data)
+    });
+  }
+  getUserInfo(runtime, user) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "getUserInfo",
+      args: [user]
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "getUserInfo",
+      data: bytesToHex3(result.data)
+    });
+  }
+  getUsersByRound(runtime, roundId) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "getUsersByRound",
+      args: [roundId]
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "getUsersByRound",
+      data: bytesToHex3(result.data)
+    });
+  }
+  sCurrentRound(runtime) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "s_currentRound"
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "s_currentRound",
+      data: bytesToHex3(result.data)
+    });
+  }
+  writeReportFromDeposit(runtime, githubId, gasConfig) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "deposit",
+      args: [githubId]
+    });
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  writeReport(runtime, callData, gasConfig) {
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  logTriggerDeposited(filters) {
+    let topics;
+    if (!filters || filters.length === 0) {
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "Deposited"
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else if (filters.length === 1) {
+      const f = filters[0];
+      const args = {
+        user: f.user,
+        roundId: f.roundId,
+        githubId: f.githubId
+      };
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "Deposited",
+        args
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else {
+      const allEncoded = filters.map((f) => {
+        const args = {
+          user: f.user,
+          roundId: f.roundId,
+          githubId: f.githubId
+        };
+        return encodeEventTopics({
+          abi: CommitOrBurnABI,
+          eventName: "Deposited",
+          args
+        });
+      });
+      topics = allEncoded[0].map((_, i) => ({
+        values: [...new Set(allEncoded.flatMap((row) => encodeTopicValue(row[i])))]
+      }));
+    }
+    const baseTrigger = this.client.logTrigger({
+      addresses: [hexToBase64(this.address)],
+      topics
+    });
+    const contract = this;
+    return {
+      capabilityId: () => baseTrigger.capabilityId(),
+      method: () => baseTrigger.method(),
+      outputSchema: () => baseTrigger.outputSchema(),
+      configAsAny: () => baseTrigger.configAsAny(),
+      adapt: (rawOutput) => contract.decodeDeposited(rawOutput)
+    };
+  }
+  decodeDeposited(log) {
+    const decoded = decodeEventLog({
+      abi: CommitOrBurnABI,
+      data: bytesToHex3(log.data),
+      topics: log.topics.map((t) => bytesToHex3(t))
+    });
+    const { data: _, ...rest } = log;
+    return { ...rest, data: decoded.args };
+  }
+}
+function fetchCommitsForUser(sendRequester, githubId, token, now) {
+  const utcMidnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const yesterdayMidnight = new Date(utcMidnight.getTime() - 24 * 60 * 60 * 1000);
+  const since = yesterdayMidnight.toISOString();
+  const until = utcMidnight.toISOString();
+  const query = `
+    query($login: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $login) {
+        contributionsCollection(from: $from, to: $to) {
+          totalCommitContributions
+        }
+      }
+    }
+  `;
+  const bodyBytes = new TextEncoder().encode(JSON.stringify({ query, variables: { login: githubId, from: since, to: until } }));
+  const body = Buffer.from(bodyBytes).toString("base64");
+  const req = {
+    url: "https://api.github.com/graphql",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body
+  };
+  const resp = sendRequester.sendRequest(req).result();
+  if (!ok(resp))
+    throw new Error(`GitHub GraphQL error: ${resp.statusCode}`);
+  const data = json(resp);
+  if (data.errors || !data.data?.user)
+    return 0;
+  return data.data.user.contributionsCollection?.totalCommitContributions ?? 0;
+}
 var onCronTrigger = (runtime) => {
-  runtime.log("Hello world! Workflow triggered.");
-  return "Hello world!";
+  const network = getNetwork({
+    chainFamily: "evm",
+    chainSelectorName: runtime.config.chainSelectorName
+  });
+  if (!network)
+    throw new Error("Network not found");
+  const now = runtime.now();
+  const client = new ClientCapability(network.chainSelector.selector);
+  const contract = new CommitOrBurn(client, runtime.config.contractAddress);
+  const currentRoundId = contract.sCurrentRound(runtime);
+  const roundInfo = contract.getRoundInfo(runtime, currentRoundId);
+  runtime.log(`${now.getTime() / 1000 >= Number(roundInfo.startTime)}`);
+  if (now.getTime() / 1000 <= Number(roundInfo.startTime)) {
+    runtime.log(`Round ${currentRoundId} is not in registration period. Skipping.`);
+    return "Skipped: not in registration period";
+  }
+  const githubIds = contract.getUsersByRound(runtime, currentRoundId);
+  const token = runtime.getSecret({ id: "GITHUB_TOKEN" }).result().value;
+  const httpClient = new ClientCapability2;
+  for (const githubId of githubIds) {
+    const commits = httpClient.sendRequest(runtime, fetchCommitsForUser, consensusMedianAggregation())(githubId, token, now).result();
+    runtime.log(`${githubId}, ${JSON.stringify(commits)}`);
+  }
+  return `Checked ${githubIds.length} users`;
 };
 var initWorkflow = (config) => {
   const cron = new CronCapability;
-  return [
-    handler(cron.trigger({ schedule: config.schedule }), onCronTrigger)
-  ];
+  return [handler(cron.trigger({ schedule: config.schedule }), onCronTrigger)];
 };
 async function main() {
   const runner = await Runner.newRunner();
@@ -19278,6 +21331,5 @@ async function main() {
 main().catch(sendErrorResponse);
 export {
   initWorkflow,
-  main,
-  onCronTrigger
+  main
 };

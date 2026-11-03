@@ -1,3 +1,5 @@
 {
-  "schedule": "*/30 * * * * *"
+  "schedule": "0 0 * * *",
+  "contractAddress": "0x035BAF9452B2EA151952a0D76a4687bd52fa093A",
+  "chainSelectorName": "ethereum-testnet-sepolia"
 }
