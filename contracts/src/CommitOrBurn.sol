@@ -33,8 +33,10 @@ contract CommitOrBurn {
     constructor() {
         s_currentRound = 1;
 
-        s_rounds[s_currentRound].startTime = block.timestamp + 7 days;
-        s_rounds[s_currentRound].endTime = block.timestamp + 14 days;
+        uint256 nextMidnight = ((block.timestamp / 1 days) + 1) * 1 days;
+
+        s_rounds[s_currentRound].startTime = nextMidnight + 7 days;
+        s_rounds[s_currentRound].endTime = nextMidnight + 14 days;
     }
 
     function deposit(string memory _githubId) external payable {
