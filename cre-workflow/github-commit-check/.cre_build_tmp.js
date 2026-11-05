@@ -6029,8 +6029,579 @@ var TxStatus;
   TxStatus[TxStatus["REVERTED"] = 1] = "REVERTED";
   TxStatus[TxStatus["SUCCESS"] = 2] = "SUCCESS";
 })(TxStatus || (TxStatus = {}));
+function execTyped(regex, string) {
+  const match = regex.exec(string);
+  return match?.groups;
+}
+var bytesRegex = /^bytes([1-9]|1[0-9]|2[0-9]|3[0-2])?$/;
+var integerRegex = /^u?int(8|16|24|32|40|48|56|64|72|80|88|96|104|112|120|128|136|144|152|160|168|176|184|192|200|208|216|224|232|240|248|256)?$/;
+var isTupleRegex = /^\(.+?\).*?$/;
+var tupleRegex = /^tuple(?<array>(\[(\d*)\])*)$/;
+function formatAbiParameter(abiParameter) {
+  let type = abiParameter.type;
+  if (tupleRegex.test(abiParameter.type) && "components" in abiParameter) {
+    type = "(";
+    const length = abiParameter.components.length;
+    for (let i = 0;i < length; i++) {
+      const component = abiParameter.components[i];
+      type += formatAbiParameter(component);
+      if (i < length - 1)
+        type += ", ";
+    }
+    const result = execTyped(tupleRegex, abiParameter.type);
+    type += `)${result?.array || ""}`;
+    return formatAbiParameter({
+      ...abiParameter,
+      type
+    });
+  }
+  if ("indexed" in abiParameter && abiParameter.indexed)
+    type = `${type} indexed`;
+  if (abiParameter.name)
+    return `${type} ${abiParameter.name}`;
+  return type;
+}
+function formatAbiParameters(abiParameters) {
+  let params = "";
+  const length = abiParameters.length;
+  for (let i = 0;i < length; i++) {
+    const abiParameter = abiParameters[i];
+    params += formatAbiParameter(abiParameter);
+    if (i !== length - 1)
+      params += ", ";
+  }
+  return params;
+}
+function formatAbiItem(abiItem) {
+  if (abiItem.type === "function")
+    return `function ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})${abiItem.stateMutability && abiItem.stateMutability !== "nonpayable" ? ` ${abiItem.stateMutability}` : ""}${abiItem.outputs?.length ? ` returns (${formatAbiParameters(abiItem.outputs)})` : ""}`;
+  if (abiItem.type === "event")
+    return `event ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})`;
+  if (abiItem.type === "error")
+    return `error ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})`;
+  if (abiItem.type === "constructor")
+    return `constructor(${formatAbiParameters(abiItem.inputs)})${abiItem.stateMutability === "payable" ? " payable" : ""}`;
+  if (abiItem.type === "fallback")
+    return `fallback() external${abiItem.stateMutability === "payable" ? " payable" : ""}`;
+  return "receive() external payable";
+}
+var structSignatureRegex = /^struct (?<name>[a-zA-Z$_][a-zA-Z0-9$_]*) \{(?<properties>.*?)\}$/;
+function isStructSignature(signature) {
+  return structSignatureRegex.test(signature);
+}
+function execStructSignature(signature) {
+  return execTyped(structSignatureRegex, signature);
+}
+var modifiers = new Set([
+  "memory",
+  "indexed",
+  "storage",
+  "calldata"
+]);
+var eventModifiers = new Set(["indexed"]);
+var functionModifiers = new Set([
+  "calldata",
+  "memory",
+  "storage"
+]);
+var version = "1.2.3";
+
+class BaseError extends Error {
+  constructor(shortMessage, args = {}) {
+    const details = args.cause instanceof BaseError ? args.cause.details : args.cause?.message ? args.cause.message : args.details;
+    const docsPath = args.cause instanceof BaseError ? args.cause.docsPath || args.docsPath : args.docsPath;
+    const message = [
+      shortMessage || "An error occurred.",
+      "",
+      ...args.metaMessages ? [...args.metaMessages, ""] : [],
+      ...docsPath ? [`Docs: https://abitype.dev${docsPath}`] : [],
+      ...details ? [`Details: ${details}`] : [],
+      `Version: abitype@${version}`
+    ].join(`
+`);
+    super(message);
+    Object.defineProperty(this, "details", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "docsPath", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "metaMessages", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "shortMessage", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: undefined
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "AbiTypeError"
+    });
+    if (args.cause)
+      this.cause = args.cause;
+    this.details = details;
+    this.docsPath = docsPath;
+    this.metaMessages = args.metaMessages;
+    this.shortMessage = shortMessage;
+  }
+}
+
+class UnknownTypeError extends BaseError {
+  constructor({ type }) {
+    super("Unknown type.", {
+      metaMessages: [
+        `Type "${type}" is not a valid ABI type. Perhaps you forgot to include a struct signature?`
+      ]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "UnknownTypeError"
+    });
+  }
+}
+
+class UnknownSolidityTypeError extends BaseError {
+  constructor({ type }) {
+    super("Unknown type.", {
+      metaMessages: [`Type "${type}" is not a valid ABI type.`]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "UnknownSolidityTypeError"
+    });
+  }
+}
+
+class InvalidAbiParametersError extends BaseError {
+  constructor({ params }) {
+    super("Failed to parse ABI parameters.", {
+      details: `parseAbiParameters(${JSON.stringify(params, null, 2)})`,
+      docsPath: "/api/human#parseabiparameters-1"
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidAbiParametersError"
+    });
+  }
+}
+
+class InvalidParameterError extends BaseError {
+  constructor({ param }) {
+    super("Invalid ABI parameter.", {
+      details: param
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidParameterError"
+    });
+  }
+}
+
+class SolidityProtectedKeywordError extends BaseError {
+  constructor({ param, name }) {
+    super("Invalid ABI parameter.", {
+      details: param,
+      metaMessages: [
+        `"${name}" is a protected Solidity keyword. More info: https://docs.soliditylang.org/en/latest/cheatsheet.html`
+      ]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "SolidityProtectedKeywordError"
+    });
+  }
+}
+
+class InvalidModifierError extends BaseError {
+  constructor({ param, type, modifier }) {
+    super("Invalid ABI parameter.", {
+      details: param,
+      metaMessages: [
+        `Modifier "${modifier}" not allowed${type ? ` in "${type}" type` : ""}.`
+      ]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidModifierError"
+    });
+  }
+}
+
+class InvalidFunctionModifierError extends BaseError {
+  constructor({ param, type, modifier }) {
+    super("Invalid ABI parameter.", {
+      details: param,
+      metaMessages: [
+        `Modifier "${modifier}" not allowed${type ? ` in "${type}" type` : ""}.`,
+        `Data location can only be specified for array, struct, or mapping types, but "${modifier}" was given.`
+      ]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidFunctionModifierError"
+    });
+  }
+}
+
+class InvalidAbiTypeParameterError extends BaseError {
+  constructor({ abiParameter }) {
+    super("Invalid ABI parameter.", {
+      details: JSON.stringify(abiParameter, null, 2),
+      metaMessages: ["ABI parameter type is invalid."]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidAbiTypeParameterError"
+    });
+  }
+}
+
+class InvalidSignatureError extends BaseError {
+  constructor({ signature, type }) {
+    super(`Invalid ${type} signature.`, {
+      details: signature
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidSignatureError"
+    });
+  }
+}
+
+class InvalidStructSignatureError extends BaseError {
+  constructor({ signature }) {
+    super("Invalid struct signature.", {
+      details: signature,
+      metaMessages: ["No properties exist."]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidStructSignatureError"
+    });
+  }
+}
+
+class CircularReferenceError extends BaseError {
+  constructor({ type }) {
+    super("Circular reference detected.", {
+      metaMessages: [`Struct "${type}" is a circular reference.`]
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "CircularReferenceError"
+    });
+  }
+}
+
+class InvalidParenthesisError extends BaseError {
+  constructor({ current, depth }) {
+    super("Unbalanced parentheses.", {
+      metaMessages: [
+        `"${current.trim()}" has too many ${depth > 0 ? "opening" : "closing"} parentheses.`
+      ],
+      details: `Depth "${depth}"`
+    });
+    Object.defineProperty(this, "name", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: "InvalidParenthesisError"
+    });
+  }
+}
+function getParameterCacheKey(param, type, structs) {
+  let structKey = "";
+  if (structs)
+    for (const struct of Object.entries(structs)) {
+      if (!struct)
+        continue;
+      let propertyKey = "";
+      for (const property of struct[1]) {
+        propertyKey += `[${property.type}${property.name ? `:${property.name}` : ""}]`;
+      }
+      structKey += `(${struct[0]}{${propertyKey}})`;
+    }
+  if (type)
+    return `${type}:${param}${structKey}`;
+  return `${param}${structKey}`;
+}
+var parameterCache = new Map([
+  ["address", { type: "address" }],
+  ["bool", { type: "bool" }],
+  ["bytes", { type: "bytes" }],
+  ["bytes32", { type: "bytes32" }],
+  ["int", { type: "int256" }],
+  ["int256", { type: "int256" }],
+  ["string", { type: "string" }],
+  ["uint", { type: "uint256" }],
+  ["uint8", { type: "uint8" }],
+  ["uint16", { type: "uint16" }],
+  ["uint24", { type: "uint24" }],
+  ["uint32", { type: "uint32" }],
+  ["uint64", { type: "uint64" }],
+  ["uint96", { type: "uint96" }],
+  ["uint112", { type: "uint112" }],
+  ["uint160", { type: "uint160" }],
+  ["uint192", { type: "uint192" }],
+  ["uint256", { type: "uint256" }],
+  ["address owner", { type: "address", name: "owner" }],
+  ["address to", { type: "address", name: "to" }],
+  ["bool approved", { type: "bool", name: "approved" }],
+  ["bytes _data", { type: "bytes", name: "_data" }],
+  ["bytes data", { type: "bytes", name: "data" }],
+  ["bytes signature", { type: "bytes", name: "signature" }],
+  ["bytes32 hash", { type: "bytes32", name: "hash" }],
+  ["bytes32 r", { type: "bytes32", name: "r" }],
+  ["bytes32 root", { type: "bytes32", name: "root" }],
+  ["bytes32 s", { type: "bytes32", name: "s" }],
+  ["string name", { type: "string", name: "name" }],
+  ["string symbol", { type: "string", name: "symbol" }],
+  ["string tokenURI", { type: "string", name: "tokenURI" }],
+  ["uint tokenId", { type: "uint256", name: "tokenId" }],
+  ["uint8 v", { type: "uint8", name: "v" }],
+  ["uint256 balance", { type: "uint256", name: "balance" }],
+  ["uint256 tokenId", { type: "uint256", name: "tokenId" }],
+  ["uint256 value", { type: "uint256", name: "value" }],
+  [
+    "event:address indexed from",
+    { type: "address", name: "from", indexed: true }
+  ],
+  ["event:address indexed to", { type: "address", name: "to", indexed: true }],
+  [
+    "event:uint indexed tokenId",
+    { type: "uint256", name: "tokenId", indexed: true }
+  ],
+  [
+    "event:uint256 indexed tokenId",
+    { type: "uint256", name: "tokenId", indexed: true }
+  ]
+]);
+var abiParameterWithoutTupleRegex = /^(?<type>[a-zA-Z$_][a-zA-Z0-9$_]*(?:\spayable)?)(?<array>(?:\[\d*?\])+?)?(?:\s(?<modifier>calldata|indexed|memory|storage{1}))?(?:\s(?<name>[a-zA-Z$_][a-zA-Z0-9$_]*))?$/;
+var abiParameterWithTupleRegex = /^\((?<type>.+?)\)(?<array>(?:\[\d*?\])+?)?(?:\s(?<modifier>calldata|indexed|memory|storage{1}))?(?:\s(?<name>[a-zA-Z$_][a-zA-Z0-9$_]*))?$/;
+var dynamicIntegerRegex = /^u?int$/;
+function parseAbiParameter(param, options) {
+  const parameterCacheKey = getParameterCacheKey(param, options?.type, options?.structs);
+  if (parameterCache.has(parameterCacheKey))
+    return parameterCache.get(parameterCacheKey);
+  const isTuple = isTupleRegex.test(param);
+  const match = execTyped(isTuple ? abiParameterWithTupleRegex : abiParameterWithoutTupleRegex, param);
+  if (!match)
+    throw new InvalidParameterError({ param });
+  if (match.name && isSolidityKeyword(match.name))
+    throw new SolidityProtectedKeywordError({ param, name: match.name });
+  const name = match.name ? { name: match.name } : {};
+  const indexed = match.modifier === "indexed" ? { indexed: true } : {};
+  const structs = options?.structs ?? {};
+  let type;
+  let components = {};
+  if (isTuple) {
+    type = "tuple";
+    const params = splitParameters(match.type);
+    const components_ = [];
+    const length = params.length;
+    for (let i = 0;i < length; i++) {
+      components_.push(parseAbiParameter(params[i], { structs }));
+    }
+    components = { components: components_ };
+  } else if (match.type in structs) {
+    type = "tuple";
+    components = { components: structs[match.type] };
+  } else if (dynamicIntegerRegex.test(match.type)) {
+    type = `${match.type}256`;
+  } else if (match.type === "address payable") {
+    type = "address";
+  } else {
+    type = match.type;
+    if (!(options?.type === "struct") && !isSolidityType(type))
+      throw new UnknownSolidityTypeError({ type });
+  }
+  if (match.modifier) {
+    if (!options?.modifiers?.has?.(match.modifier))
+      throw new InvalidModifierError({
+        param,
+        type: options?.type,
+        modifier: match.modifier
+      });
+    if (functionModifiers.has(match.modifier) && !isValidDataLocation(type, !!match.array))
+      throw new InvalidFunctionModifierError({
+        param,
+        type: options?.type,
+        modifier: match.modifier
+      });
+  }
+  const abiParameter = {
+    type: `${type}${match.array ?? ""}`,
+    ...name,
+    ...indexed,
+    ...components
+  };
+  parameterCache.set(parameterCacheKey, abiParameter);
+  return abiParameter;
+}
+function splitParameters(params, result = [], current = "", depth = 0) {
+  const length = params.trim().length;
+  for (let i = 0;i < length; i++) {
+    const char = params[i];
+    const tail = params.slice(i + 1);
+    switch (char) {
+      case ",":
+        return depth === 0 ? splitParameters(tail, [...result, current.trim()]) : splitParameters(tail, result, `${current}${char}`, depth);
+      case "(":
+        return splitParameters(tail, result, `${current}${char}`, depth + 1);
+      case ")":
+        return splitParameters(tail, result, `${current}${char}`, depth - 1);
+      default:
+        return splitParameters(tail, result, `${current}${char}`, depth);
+    }
+  }
+  if (current === "")
+    return result;
+  if (depth !== 0)
+    throw new InvalidParenthesisError({ current, depth });
+  result.push(current.trim());
+  return result;
+}
+function isSolidityType(type) {
+  return type === "address" || type === "bool" || type === "function" || type === "string" || bytesRegex.test(type) || integerRegex.test(type);
+}
+var protectedKeywordsRegex = /^(?:after|alias|anonymous|apply|auto|byte|calldata|case|catch|constant|copyof|default|defined|error|event|external|false|final|function|immutable|implements|in|indexed|inline|internal|let|mapping|match|memory|mutable|null|of|override|partial|private|promise|public|pure|reference|relocatable|return|returns|sizeof|static|storage|struct|super|supports|switch|this|true|try|typedef|typeof|var|view|virtual)$/;
+function isSolidityKeyword(name) {
+  return name === "address" || name === "bool" || name === "function" || name === "string" || name === "tuple" || bytesRegex.test(name) || integerRegex.test(name) || protectedKeywordsRegex.test(name);
+}
+function isValidDataLocation(type, isArray) {
+  return isArray || type === "bytes" || type === "string" || type === "tuple";
+}
+function parseStructs(signatures) {
+  const shallowStructs = {};
+  const signaturesLength = signatures.length;
+  for (let i = 0;i < signaturesLength; i++) {
+    const signature = signatures[i];
+    if (!isStructSignature(signature))
+      continue;
+    const match = execStructSignature(signature);
+    if (!match)
+      throw new InvalidSignatureError({ signature, type: "struct" });
+    const properties = match.properties.split(";");
+    const components = [];
+    const propertiesLength = properties.length;
+    for (let k = 0;k < propertiesLength; k++) {
+      const property = properties[k];
+      const trimmed = property.trim();
+      if (!trimmed)
+        continue;
+      const abiParameter = parseAbiParameter(trimmed, {
+        type: "struct"
+      });
+      components.push(abiParameter);
+    }
+    if (!components.length)
+      throw new InvalidStructSignatureError({ signature });
+    shallowStructs[match.name] = components;
+  }
+  const resolvedStructs = {};
+  const entries = Object.entries(shallowStructs);
+  const entriesLength = entries.length;
+  for (let i = 0;i < entriesLength; i++) {
+    const [name, parameters] = entries[i];
+    resolvedStructs[name] = resolveStructs(parameters, shallowStructs);
+  }
+  return resolvedStructs;
+}
+var typeWithoutTupleRegex = /^(?<type>[a-zA-Z$_][a-zA-Z0-9$_]*)(?<array>(?:\[\d*?\])+?)?$/;
+function resolveStructs(abiParameters = [], structs = {}, ancestors = new Set) {
+  const components = [];
+  const length = abiParameters.length;
+  for (let i = 0;i < length; i++) {
+    const abiParameter = abiParameters[i];
+    const isTuple = isTupleRegex.test(abiParameter.type);
+    if (isTuple)
+      components.push(abiParameter);
+    else {
+      const match = execTyped(typeWithoutTupleRegex, abiParameter.type);
+      if (!match?.type)
+        throw new InvalidAbiTypeParameterError({ abiParameter });
+      const { array, type } = match;
+      if (type in structs) {
+        if (ancestors.has(type))
+          throw new CircularReferenceError({ type });
+        components.push({
+          ...abiParameter,
+          type: `tuple${array ?? ""}`,
+          components: resolveStructs(structs[type], structs, new Set([...ancestors, type]))
+        });
+      } else {
+        if (isSolidityType(type))
+          components.push(abiParameter);
+        else
+          throw new UnknownTypeError({ type });
+      }
+    }
+  }
+  return components;
+}
+function parseAbiParameters(params) {
+  const abiParameters = [];
+  if (typeof params === "string") {
+    const parameters = splitParameters(params);
+    const length = parameters.length;
+    for (let i = 0;i < length; i++) {
+      abiParameters.push(parseAbiParameter(parameters[i], { modifiers }));
+    }
+  } else {
+    const structs = parseStructs(params);
+    const length = params.length;
+    for (let i = 0;i < length; i++) {
+      const signature = params[i];
+      if (isStructSignature(signature))
+        continue;
+      const parameters = splitParameters(signature);
+      const length = parameters.length;
+      for (let k = 0;k < length; k++) {
+        abiParameters.push(parseAbiParameter(parameters[k], { modifiers, structs }));
+      }
+    }
+  }
+  if (abiParameters.length === 0)
+    throw new InvalidAbiParametersError({ params });
+  return abiParameters;
+}
 var zeroAddress = "0x0000000000000000000000000000000000000000";
-function formatAbiItem(abiItem, { includeName = false } = {}) {
+function formatAbiItem2(abiItem, { includeName = false } = {}) {
   if (abiItem.type !== "function" && abiItem.type !== "event" && abiItem.type !== "error")
     throw new InvalidDefinitionTypeError(abiItem.type);
   return `${abiItem.name}(${formatAbiParams(abiItem.inputs, { includeName })})`;
@@ -6060,23 +6631,23 @@ function size(value) {
     return Math.ceil((value.length - 2) / 2);
   return value.length;
 }
-var version = "2.57.14";
+var version2 = "2.57.14";
 var errorConfig = {
   getDocsUrl: ({ docsBaseUrl, docsPath = "", docsSlug }) => docsPath ? `${docsBaseUrl ?? "https://viem.sh"}${docsPath}${docsSlug ? `#${docsSlug}` : ""}` : undefined,
-  version: `viem@${version}`
+  version: `viem@${version2}`
 };
 
-class BaseError extends Error {
+class BaseError3 extends Error {
   constructor(shortMessage, args = {}) {
     const details = (() => {
-      if (args.cause instanceof BaseError)
+      if (args.cause instanceof BaseError3)
         return args.cause.details;
       if (args.cause?.message)
         return args.cause.message;
       return args.details;
     })();
     const docsPath = (() => {
-      if (args.cause instanceof BaseError)
+      if (args.cause instanceof BaseError3)
         return args.cause.docsPath || args.docsPath;
       return args.docsPath;
     })();
@@ -6132,7 +6703,7 @@ class BaseError extends Error {
     this.metaMessages = args.metaMessages;
     this.name = args.name ?? this.name;
     this.shortMessage = shortMessage;
-    this.version = version;
+    this.version = version2;
   }
   walk(fn) {
     return walk(this, fn);
@@ -6146,7 +6717,7 @@ function walk(err, fn) {
   return fn ? null : err;
 }
 
-class AbiDecodingDataSizeTooSmallError extends BaseError {
+class AbiDecodingDataSizeTooSmallError extends BaseError3 {
   constructor({ data, params, size }) {
     super([`Data size of ${size} bytes is too small for given parameters.`].join(`
 `), {
@@ -6180,7 +6751,7 @@ class AbiDecodingDataSizeTooSmallError extends BaseError {
   }
 }
 
-class AbiDecodingZeroDataError extends BaseError {
+class AbiDecodingZeroDataError extends BaseError3 {
   constructor({ cause } = {}) {
     super('Cannot decode zero data ("0x") with ABI parameters.', {
       name: "AbiDecodingZeroDataError",
@@ -6189,7 +6760,7 @@ class AbiDecodingZeroDataError extends BaseError {
   }
 }
 
-class AbiEncodingArrayLengthMismatchError extends BaseError {
+class AbiEncodingArrayLengthMismatchError extends BaseError3 {
   constructor({ expectedLength, givenLength, type }) {
     super([
       `ABI encoding array length mismatch for type ${type}.`,
@@ -6200,13 +6771,13 @@ class AbiEncodingArrayLengthMismatchError extends BaseError {
   }
 }
 
-class AbiEncodingBytesSizeMismatchError extends BaseError {
+class AbiEncodingBytesSizeMismatchError extends BaseError3 {
   constructor({ expectedSize, value }) {
     super(`Size of bytes "${value}" (bytes${size(value)}) does not match expected size (bytes${expectedSize}).`, { name: "AbiEncodingBytesSizeMismatchError" });
   }
 }
 
-class AbiEncodingLengthMismatchError extends BaseError {
+class AbiEncodingLengthMismatchError extends BaseError3 {
   constructor({ expectedLength, givenLength }) {
     super([
       "ABI encoding params/values length mismatch.",
@@ -6217,7 +6788,7 @@ class AbiEncodingLengthMismatchError extends BaseError {
   }
 }
 
-class AbiEventSignatureEmptyTopicsError extends BaseError {
+class AbiEventSignatureEmptyTopicsError extends BaseError3 {
   constructor({ docsPath }) {
     super("Cannot extract event signature from empty topics.", {
       docsPath,
@@ -6226,7 +6797,7 @@ class AbiEventSignatureEmptyTopicsError extends BaseError {
   }
 }
 
-class AbiEventSignatureNotFoundError extends BaseError {
+class AbiEventSignatureNotFoundError extends BaseError3 {
   constructor(signature, { docsPath }) {
     super([
       `Encoded event signature "${signature}" not found on ABI.`,
@@ -6240,7 +6811,7 @@ class AbiEventSignatureNotFoundError extends BaseError {
   }
 }
 
-class AbiEventNotFoundError extends BaseError {
+class AbiEventNotFoundError extends BaseError3 {
   constructor(eventName, { docsPath } = {}) {
     super([
       `Event ${eventName ? `"${eventName}" ` : ""}not found on ABI.`,
@@ -6253,7 +6824,7 @@ class AbiEventNotFoundError extends BaseError {
   }
 }
 
-class AbiFunctionNotFoundError extends BaseError {
+class AbiFunctionNotFoundError extends BaseError3 {
   constructor(functionName, { docsPath } = {}) {
     super([
       `Function ${functionName ? `"${functionName}" ` : ""}not found on ABI.`,
@@ -6266,7 +6837,7 @@ class AbiFunctionNotFoundError extends BaseError {
   }
 }
 
-class AbiFunctionOutputsNotFoundError extends BaseError {
+class AbiFunctionOutputsNotFoundError extends BaseError3 {
   constructor(functionName, { docsPath }) {
     super([
       `Function "${functionName}" does not contain any \`outputs\` on ABI.`,
@@ -6280,12 +6851,12 @@ class AbiFunctionOutputsNotFoundError extends BaseError {
   }
 }
 
-class AbiItemAmbiguityError extends BaseError {
+class AbiItemAmbiguityError extends BaseError3 {
   constructor(x, y) {
     super("Found ambiguous types in overloaded ABI items.", {
       metaMessages: [
-        `\`${x.type}\` in \`${formatAbiItem(x.abiItem)}\`, and`,
-        `\`${y.type}\` in \`${formatAbiItem(y.abiItem)}\``,
+        `\`${x.type}\` in \`${formatAbiItem2(x.abiItem)}\`, and`,
+        `\`${y.type}\` in \`${formatAbiItem2(y.abiItem)}\``,
         "",
         "These types encode differently and cannot be distinguished at runtime.",
         "Remove one of the ambiguous items in the ABI."
@@ -6295,7 +6866,7 @@ class AbiItemAmbiguityError extends BaseError {
   }
 }
 
-class DecodeLogDataMismatch extends BaseError {
+class DecodeLogDataMismatch extends BaseError3 {
   constructor({ abiItem, data, params, size }) {
     super([
       `Data size of ${size} bytes is too small for non-indexed event parameters.`
@@ -6338,10 +6909,10 @@ class DecodeLogDataMismatch extends BaseError {
   }
 }
 
-class DecodeLogTopicsMismatch extends BaseError {
+class DecodeLogTopicsMismatch extends BaseError3 {
   constructor({ abiItem, param }) {
     super([
-      `Expected a topic for indexed event parameter${param.name ? ` "${param.name}"` : ""} on event "${formatAbiItem(abiItem, { includeName: true })}".`
+      `Expected a topic for indexed event parameter${param.name ? ` "${param.name}"` : ""} on event "${formatAbiItem2(abiItem, { includeName: true })}".`
     ].join(`
 `), { name: "DecodeLogTopicsMismatch" });
     Object.defineProperty(this, "abiItem", {
@@ -6354,7 +6925,7 @@ class DecodeLogTopicsMismatch extends BaseError {
   }
 }
 
-class InvalidAbiEncodingTypeError extends BaseError {
+class InvalidAbiEncodingTypeError extends BaseError3 {
   constructor(type, { docsPath }) {
     super([
       `Type "${type}" is not a valid encoding type.`,
@@ -6364,7 +6935,7 @@ class InvalidAbiEncodingTypeError extends BaseError {
   }
 }
 
-class InvalidAbiDecodingTypeError extends BaseError {
+class InvalidAbiDecodingTypeError extends BaseError3 {
   constructor(type, { docsPath }) {
     super([
       `Type "${type}" is not a valid decoding type.`,
@@ -6374,7 +6945,7 @@ class InvalidAbiDecodingTypeError extends BaseError {
   }
 }
 
-class InvalidArrayError extends BaseError {
+class InvalidArrayError extends BaseError3 {
   constructor(value) {
     super([`Value "${value}" is not a valid array.`].join(`
 `), {
@@ -6383,7 +6954,7 @@ class InvalidArrayError extends BaseError {
   }
 }
 
-class InvalidDefinitionTypeError extends BaseError {
+class InvalidDefinitionTypeError extends BaseError3 {
   constructor(type) {
     super([
       `"${type}" is not a valid definition type.`,
@@ -6393,7 +6964,7 @@ class InvalidDefinitionTypeError extends BaseError {
   }
 }
 
-class NegativeOffsetError extends BaseError {
+class NegativeOffsetError extends BaseError3 {
   constructor({ offset }) {
     super(`Offset \`${offset}\` cannot be negative.`, {
       name: "NegativeOffsetError"
@@ -6401,25 +6972,25 @@ class NegativeOffsetError extends BaseError {
   }
 }
 
-class PositionOutOfBoundsError extends BaseError {
+class PositionOutOfBoundsError extends BaseError3 {
   constructor({ length, position }) {
     super(`Position \`${position}\` is out of bounds (\`0 < position < ${length}\`).`, { name: "PositionOutOfBoundsError" });
   }
 }
 
-class RecursiveReadLimitExceededError extends BaseError {
+class RecursiveReadLimitExceededError extends BaseError3 {
   constructor({ count, limit }) {
     super(`Recursive read limit of \`${limit}\` exceeded (recursive read count: \`${count}\`).`, { name: "RecursiveReadLimitExceededError" });
   }
 }
 
-class SliceOffsetOutOfBoundsError extends BaseError {
+class SliceOffsetOutOfBoundsError extends BaseError3 {
   constructor({ offset, position, size }) {
     super(`Slice ${position === "start" ? "starting" : "ending"} at offset "${offset}" is out-of-bounds (size: ${size}).`, { name: "SliceOffsetOutOfBoundsError" });
   }
 }
 
-class SizeExceedsPaddingSizeError extends BaseError {
+class SizeExceedsPaddingSizeError extends BaseError3 {
   constructor({ size, targetSize, type }) {
     super(`${type.charAt(0).toUpperCase()}${type.slice(1).toLowerCase()} size (${size}) exceeds padding size (${targetSize}).`, { name: "SizeExceedsPaddingSizeError" });
   }
@@ -6458,13 +7029,13 @@ function padBytes(bytes, { dir, size = 32 } = {}) {
   return paddedBytes;
 }
 
-class IntegerOutOfRangeError extends BaseError {
+class IntegerOutOfRangeError extends BaseError3 {
   constructor({ max, min, signed, size, value }) {
     super(`Number "${value}" is not in safe ${size ? `${size * 8}-bit ${signed ? "signed" : "unsigned"} ` : ""}integer range ${max ? `(${min} to ${max})` : `(above ${min})`}`, { name: "IntegerOutOfRangeError" });
   }
 }
 
-class InvalidBytesBooleanError extends BaseError {
+class InvalidBytesBooleanError extends BaseError3 {
   constructor(bytes) {
     super(`Bytes value "${bytes}" is not a valid boolean. The bytes array must contain a single byte of either a 0 or 1 value.`, {
       name: "InvalidBytesBooleanError"
@@ -6472,7 +7043,7 @@ class InvalidBytesBooleanError extends BaseError {
   }
 }
 
-class SizeOverflowError extends BaseError {
+class SizeOverflowError extends BaseError3 {
   constructor({ givenSize, maxSize }) {
     super(`Size cannot exceed ${maxSize} bytes. Given size: ${givenSize} bytes.`, { name: "SizeOverflowError" });
   }
@@ -6642,7 +7213,7 @@ function hexToBytes(hex_, opts = {}) {
     const nibbleLeft = charCodeToBase16(hexString.charCodeAt(j++));
     const nibbleRight = charCodeToBase16(hexString.charCodeAt(j++));
     if (nibbleLeft === undefined || nibbleRight === undefined) {
-      throw new BaseError(`Invalid byte sequence ("${hexString[j - 2]}${hexString[j - 1]}" in "${hexString}").`);
+      throw new BaseError3(`Invalid byte sequence ("${hexString[j - 2]}${hexString[j - 1]}" in "${hexString}").`);
     }
     bytes[index] = nibbleLeft * 16 + nibbleRight;
   }
@@ -6939,59 +7510,6 @@ var hash = (value) => keccak256(toBytes(value));
 function hashSignature(sig) {
   return hash(sig);
 }
-function execTyped(regex, string) {
-  const match = regex.exec(string);
-  return match?.groups;
-}
-var tupleRegex = /^tuple(?<array>(\[(\d*)\])*)$/;
-function formatAbiParameter(abiParameter) {
-  let type = abiParameter.type;
-  if (tupleRegex.test(abiParameter.type) && "components" in abiParameter) {
-    type = "(";
-    const length = abiParameter.components.length;
-    for (let i = 0;i < length; i++) {
-      const component = abiParameter.components[i];
-      type += formatAbiParameter(component);
-      if (i < length - 1)
-        type += ", ";
-    }
-    const result = execTyped(tupleRegex, abiParameter.type);
-    type += `)${result?.array || ""}`;
-    return formatAbiParameter({
-      ...abiParameter,
-      type
-    });
-  }
-  if ("indexed" in abiParameter && abiParameter.indexed)
-    type = `${type} indexed`;
-  if (abiParameter.name)
-    return `${type} ${abiParameter.name}`;
-  return type;
-}
-function formatAbiParameters(abiParameters) {
-  let params = "";
-  const length = abiParameters.length;
-  for (let i = 0;i < length; i++) {
-    const abiParameter = abiParameters[i];
-    params += formatAbiParameter(abiParameter);
-    if (i !== length - 1)
-      params += ", ";
-  }
-  return params;
-}
-function formatAbiItem2(abiItem) {
-  if (abiItem.type === "function")
-    return `function ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})${abiItem.stateMutability && abiItem.stateMutability !== "nonpayable" ? ` ${abiItem.stateMutability}` : ""}${abiItem.outputs?.length ? ` returns (${formatAbiParameters(abiItem.outputs)})` : ""}`;
-  if (abiItem.type === "event")
-    return `event ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})`;
-  if (abiItem.type === "error")
-    return `error ${abiItem.name}(${formatAbiParameters(abiItem.inputs)})`;
-  if (abiItem.type === "constructor")
-    return `constructor(${formatAbiParameters(abiItem.inputs)})${abiItem.stateMutability === "payable" ? " payable" : ""}`;
-  if (abiItem.type === "fallback")
-    return `fallback() external${abiItem.stateMutability === "payable" ? " payable" : ""}`;
-  return "receive() external payable";
-}
 function normalizeSignature(signature) {
   let active = true;
   let current = "";
@@ -7031,14 +7549,14 @@ function normalizeSignature(signature) {
     current += char;
   }
   if (!valid)
-    throw new BaseError("Unable to normalize signature.");
+    throw new BaseError3("Unable to normalize signature.");
   return result;
 }
 var toSignature = (def) => {
   const def_ = (() => {
     if (typeof def === "string")
       return def;
-    return formatAbiItem2(def);
+    return formatAbiItem(def);
   })();
   return normalizeSignature(def_);
 };
@@ -7047,7 +7565,7 @@ function toSignatureHash(fn) {
 }
 var toEventSelector = toSignatureHash;
 
-class InvalidAddressError extends BaseError {
+class InvalidAddressError extends BaseError3 {
   constructor({ address }) {
     super(`Address "${address}" is invalid.`, {
       metaMessages: [
@@ -7373,7 +7891,7 @@ function bytesToString(bytes_, opts = {}) {
 function concatHex(values) {
   return `0x${values.reduce((acc, x) => acc + x.replace("0x", ""), "")}`;
 }
-var integerRegex = /^(u?int)(8|16|24|32|40|48|56|64|72|80|88|96|104|112|120|128|136|144|152|160|168|176|184|192|200|208|216|224|232|240|248|256)?$/;
+var integerRegex2 = /^(u?int)(8|16|24|32|40|48|56|64|72|80|88|96|104|112|120|128|136|144|152|160|168|176|184|192|200|208|216|224|232|240|248|256)?$/;
 function encodeAbiParameters(params, values) {
   if (params.length !== values.length)
     throw new AbiEncodingLengthMismatchError({
@@ -7412,7 +7930,7 @@ function prepareParam({ param, value }) {
   }
   if (param.type.startsWith("uint") || param.type.startsWith("int")) {
     const signed = param.type.startsWith("int");
-    const [, , size = "256"] = integerRegex.exec(param.type) ?? [];
+    const [, , size = "256"] = integerRegex2.exec(param.type) ?? [];
     return encodeNumber(value, {
       signed,
       size: Number(size)
@@ -7519,7 +8037,7 @@ function encodeBytes(value, { param }) {
 }
 function encodeBool(value) {
   if (typeof value !== "boolean")
-    throw new BaseError(`Invalid boolean value: "${value}" (type: ${typeof value}). Expected: \`true\` or \`false\`.`);
+    throw new BaseError3(`Invalid boolean value: "${value}" (type: ${typeof value}). Expected: \`true\` or \`false\`.`);
   return { dynamic: false, encoded: padHex(boolToHex(value)) };
 }
 function encodeNumber(value, { signed, size = 256 }) {
@@ -7799,7 +8317,7 @@ function decodeEventLog(parameters) {
   const [signature, ...argTopics] = topics;
   if (!signature)
     throw new AbiEventSignatureEmptyTopicsError({ docsPath });
-  const abiItem = abi.find((x) => x.type === "event" && signature === toEventSelector(formatAbiItem(x)));
+  const abiItem = abi.find((x) => x.type === "event" && signature === toEventSelector(formatAbiItem2(x)));
   if (!(abiItem && ("name" in abiItem)) || abiItem.type !== "event")
     throw new AbiEventSignatureNotFoundError(signature, { docsPath });
   const { name, inputs } = abiItem;
@@ -8027,7 +8545,7 @@ function decodeFunctionResult(parameters) {
   return;
 }
 
-class FilterTypeNotSupportedError extends BaseError {
+class FilterTypeNotSupportedError extends BaseError3 {
   constructor(type) {
     super(`Filter type "${type}" is not supported.`, {
       name: "FilterTypeNotSupportedError"
@@ -8060,7 +8578,7 @@ function encodeEventTopics(parameters) {
   }
   if (abiItem.anonymous)
     return topics;
-  const definition = formatAbiItem(abiItem);
+  const definition = formatAbiItem2(abiItem);
   const signature = toEventSelector(definition);
   return [signature, ...topics];
 }
@@ -8091,7 +8609,7 @@ function prepareEncodeFunctionData(parameters) {
     throw new AbiFunctionNotFoundError(undefined, { docsPath: docsPath4 });
   return {
     abi: [abiItem],
-    functionName: toFunctionSelector(formatAbiItem(abiItem))
+    functionName: toFunctionSelector(formatAbiItem2(abiItem))
   };
 }
 function encodeFunctionData(parameters) {
@@ -14015,7 +14533,6 @@ class ZodFunction extends ZodType {
     });
   }
 }
-
 class ZodLazy extends ZodType {
   get schema() {
     return this._def.getter();
@@ -19897,7 +20414,6 @@ var testnetByNameByFamily = {
     ["tron-testnet-nile", tron_testnet_nile_default]
   ])
 };
-
 class NetworkLookup {
   maps;
   constructor(maps) {
@@ -21092,7 +21608,7 @@ var encodeTopicValue = (t) => {
     return t.map(hexToBase64);
   return [hexToBase64(t)];
 };
-var CommitOrBurnABI = [{ type: "constructor", inputs: [], stateMutability: "nonpayable" }, { type: "function", name: "UNIT", inputs: [], outputs: [{ name: "", type: "uint256", internalType: "uint256" }], stateMutability: "view" }, { type: "function", name: "deposit", inputs: [{ name: "_githubId", type: "string", internalType: "string" }], outputs: [], stateMutability: "payable" }, { type: "function", name: "getRoundInfo", inputs: [{ name: "_roundId", type: "uint256", internalType: "uint256" }], outputs: [{ name: "", type: "tuple", internalType: "structCommitOrBurn.Round", components: [{ name: "startTime", type: "uint256", internalType: "uint256" }, { name: "endTime", type: "uint256", internalType: "uint256" }, { name: "totalDeposited", type: "uint256", internalType: "uint256" }, { name: "totalShares", type: "uint256", internalType: "uint256" }, { name: "resolved", type: "bool", internalType: "bool" }] }], stateMutability: "view" }, { type: "function", name: "getUserInfo", inputs: [{ name: "_user", type: "address", internalType: "address" }], outputs: [{ name: "", type: "tuple", internalType: "structCommitOrBurn.User", components: [{ name: "githubId", type: "string", internalType: "string" }, { name: "roundId", type: "uint256", internalType: "uint256" }, { name: "shares", type: "uint256", internalType: "uint256" }] }], stateMutability: "view" }, { type: "function", name: "getUsersByRound", inputs: [{ name: "_roundId", type: "uint256", internalType: "uint256" }], outputs: [{ name: "", type: "string[]", internalType: "string[]" }], stateMutability: "view" }, { type: "function", name: "s_currentRound", inputs: [], outputs: [{ name: "", type: "uint256", internalType: "uint256" }], stateMutability: "view" }, { type: "event", name: "Deposited", inputs: [{ name: "user", type: "address", indexed: true, internalType: "address" }, { name: "roundId", type: "uint256", indexed: true, internalType: "uint256" }, { name: "githubId", type: "string", indexed: true, internalType: "string" }, { name: "shares", type: "uint256", indexed: false, internalType: "uint256" }], anonymous: false }, { type: "error", name: "CommitOrBurn__CantEnterSameRound", inputs: [] }, { type: "error", name: "CommitOrBurn__GithubIdIsNotExist", inputs: [] }, { type: "error", name: "CommitOrBurn__MustSendMoreThanOne", inputs: [] }, { type: "error", name: "CommitOrBurn__MustSendMultipleOfUNIT", inputs: [] }];
+var CommitOrBurnABI = [{ type: "constructor", inputs: [{ name: "_forwarderAddres", type: "address", internalType: "address" }], stateMutability: "nonpayable" }, { type: "function", name: "UNIT", inputs: [], outputs: [{ name: "", type: "uint256", internalType: "uint256" }], stateMutability: "view" }, { type: "function", name: "deposit", inputs: [{ name: "_githubId", type: "string", internalType: "string" }], outputs: [], stateMutability: "payable" }, { type: "function", name: "getExpectedAuthor", inputs: [], outputs: [{ name: "", type: "address", internalType: "address" }], stateMutability: "view" }, { type: "function", name: "getExpectedWorkflowId", inputs: [], outputs: [{ name: "", type: "bytes32", internalType: "bytes32" }], stateMutability: "view" }, { type: "function", name: "getExpectedWorkflowName", inputs: [], outputs: [{ name: "", type: "bytes10", internalType: "bytes10" }], stateMutability: "view" }, { type: "function", name: "getForwarderAddress", inputs: [], outputs: [{ name: "", type: "address", internalType: "address" }], stateMutability: "view" }, { type: "function", name: "getRoundInfo", inputs: [{ name: "_roundId", type: "uint256", internalType: "uint256" }], outputs: [{ name: "", type: "tuple", internalType: "structCommitOrBurn.Round", components: [{ name: "startTime", type: "uint256", internalType: "uint256" }, { name: "endTime", type: "uint256", internalType: "uint256" }, { name: "totalDeposited", type: "uint256", internalType: "uint256" }, { name: "totalShares", type: "uint256", internalType: "uint256" }, { name: "resolved", type: "bool", internalType: "bool" }] }], stateMutability: "view" }, { type: "function", name: "getUserInfo", inputs: [{ name: "_user", type: "address", internalType: "address" }], outputs: [{ name: "", type: "tuple", internalType: "structCommitOrBurn.User", components: [{ name: "githubId", type: "string", internalType: "string" }, { name: "roundId", type: "uint256", internalType: "uint256" }, { name: "shares", type: "uint256", internalType: "uint256" }, { name: "success", type: "bool", internalType: "bool" }] }], stateMutability: "view" }, { type: "function", name: "getUsersGithubIdByRound", inputs: [{ name: "_roundId", type: "uint256", internalType: "uint256" }], outputs: [{ name: "", type: "string[]", internalType: "string[]" }], stateMutability: "view" }, { type: "function", name: "onReport", inputs: [{ name: "metadata", type: "bytes", internalType: "bytes" }, { name: "report", type: "bytes", internalType: "bytes" }], outputs: [], stateMutability: "nonpayable" }, { type: "function", name: "owner", inputs: [], outputs: [{ name: "", type: "address", internalType: "address" }], stateMutability: "view" }, { type: "function", name: "renounceOwnership", inputs: [], outputs: [], stateMutability: "nonpayable" }, { type: "function", name: "s_currentRound", inputs: [], outputs: [{ name: "", type: "uint256", internalType: "uint256" }], stateMutability: "view" }, { type: "function", name: "setExpectedAuthor", inputs: [{ name: "_author", type: "address", internalType: "address" }], outputs: [], stateMutability: "nonpayable" }, { type: "function", name: "setExpectedWorkflowId", inputs: [{ name: "_id", type: "bytes32", internalType: "bytes32" }], outputs: [], stateMutability: "nonpayable" }, { type: "function", name: "setExpectedWorkflowName", inputs: [{ name: "_name", type: "string", internalType: "string" }], outputs: [], stateMutability: "nonpayable" }, { type: "function", name: "setForwarderAddress", inputs: [{ name: "_forwarder", type: "address", internalType: "address" }], outputs: [], stateMutability: "nonpayable" }, { type: "function", name: "supportsInterface", inputs: [{ name: "interfaceId", type: "bytes4", internalType: "bytes4" }], outputs: [{ name: "", type: "bool", internalType: "bool" }], stateMutability: "pure" }, { type: "function", name: "transferOwnership", inputs: [{ name: "newOwner", type: "address", internalType: "address" }], outputs: [], stateMutability: "nonpayable" }, { type: "event", name: "Deposited", inputs: [{ name: "user", type: "address", indexed: true, internalType: "address" }, { name: "roundId", type: "uint256", indexed: true, internalType: "uint256" }, { name: "githubId", type: "string", indexed: true, internalType: "string" }, { name: "shares", type: "uint256", indexed: false, internalType: "uint256" }], anonymous: false }, { type: "event", name: "ExpectedAuthorUpdated", inputs: [{ name: "previousAuthor", type: "address", indexed: true, internalType: "address" }, { name: "newAuthor", type: "address", indexed: true, internalType: "address" }], anonymous: false }, { type: "event", name: "ExpectedWorkflowIdUpdated", inputs: [{ name: "previousId", type: "bytes32", indexed: true, internalType: "bytes32" }, { name: "newId", type: "bytes32", indexed: true, internalType: "bytes32" }], anonymous: false }, { type: "event", name: "ExpectedWorkflowNameUpdated", inputs: [{ name: "previousName", type: "bytes10", indexed: true, internalType: "bytes10" }, { name: "newName", type: "bytes10", indexed: true, internalType: "bytes10" }], anonymous: false }, { type: "event", name: "ForwarderAddressUpdated", inputs: [{ name: "previousForwarder", type: "address", indexed: true, internalType: "address" }, { name: "newForwarder", type: "address", indexed: true, internalType: "address" }], anonymous: false }, { type: "event", name: "OwnershipTransferred", inputs: [{ name: "previousOwner", type: "address", indexed: true, internalType: "address" }, { name: "newOwner", type: "address", indexed: true, internalType: "address" }], anonymous: false }, { type: "event", name: "SecurityWarning", inputs: [{ name: "message", type: "string", indexed: false, internalType: "string" }], anonymous: false }, { type: "error", name: "CommitOrBurn__CantEnterSameRound", inputs: [] }, { type: "error", name: "CommitOrBurn__GithubIdIsNotExist", inputs: [] }, { type: "error", name: "CommitOrBurn__MustSendMoreThanOne", inputs: [] }, { type: "error", name: "CommitOrBurn__MustSendMultipleOfUNIT", inputs: [] }, { type: "error", name: "InvalidAuthor", inputs: [{ name: "received", type: "address", internalType: "address" }, { name: "expected", type: "address", internalType: "address" }] }, { type: "error", name: "InvalidForwarderAddress", inputs: [] }, { type: "error", name: "InvalidSender", inputs: [{ name: "sender", type: "address", internalType: "address" }, { name: "expected", type: "address", internalType: "address" }] }, { type: "error", name: "InvalidWorkflowId", inputs: [{ name: "received", type: "bytes32", internalType: "bytes32" }, { name: "expected", type: "bytes32", internalType: "bytes32" }] }, { type: "error", name: "InvalidWorkflowName", inputs: [{ name: "received", type: "bytes10", internalType: "bytes10" }, { name: "expected", type: "bytes10", internalType: "bytes10" }] }, { type: "error", name: "OwnableInvalidOwner", inputs: [{ name: "owner", type: "address", internalType: "address" }] }, { type: "error", name: "OwnableUnauthorizedAccount", inputs: [{ name: "account", type: "address", internalType: "address" }] }, { type: "error", name: "WorkflowNameRequiresAuthorValidation", inputs: [] }];
 
 class CommitOrBurn {
   client;
@@ -21113,6 +21629,66 @@ class CommitOrBurn {
     return decodeFunctionResult({
       abi: CommitOrBurnABI,
       functionName: "UNIT",
+      data: bytesToHex3(result.data)
+    });
+  }
+  getExpectedAuthor(runtime) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "getExpectedAuthor"
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "getExpectedAuthor",
+      data: bytesToHex3(result.data)
+    });
+  }
+  getExpectedWorkflowId(runtime) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "getExpectedWorkflowId"
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "getExpectedWorkflowId",
+      data: bytesToHex3(result.data)
+    });
+  }
+  getExpectedWorkflowName(runtime) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "getExpectedWorkflowName"
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "getExpectedWorkflowName",
+      data: bytesToHex3(result.data)
+    });
+  }
+  getForwarderAddress(runtime) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "getForwarderAddress"
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "getForwarderAddress",
       data: bytesToHex3(result.data)
     });
   }
@@ -21148,10 +21724,10 @@ class CommitOrBurn {
       data: bytesToHex3(result.data)
     });
   }
-  getUsersByRound(runtime, roundId) {
+  getUsersGithubIdByRound(runtime, roundId) {
     const callData = encodeFunctionData({
       abi: CommitOrBurnABI,
-      functionName: "getUsersByRound",
+      functionName: "getUsersGithubIdByRound",
       args: [roundId]
     });
     const result = this.client.callContract(runtime, {
@@ -21160,7 +21736,22 @@ class CommitOrBurn {
     }).result();
     return decodeFunctionResult({
       abi: CommitOrBurnABI,
-      functionName: "getUsersByRound",
+      functionName: "getUsersGithubIdByRound",
+      data: bytesToHex3(result.data)
+    });
+  }
+  owner(runtime) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "owner"
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "owner",
       data: bytesToHex3(result.data)
     });
   }
@@ -21179,11 +21770,105 @@ class CommitOrBurn {
       data: bytesToHex3(result.data)
     });
   }
+  supportsInterface(runtime, interfaceId) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "supportsInterface",
+      args: [interfaceId]
+    });
+    const result = this.client.callContract(runtime, {
+      call: encodeCallMsg({ from: zeroAddress, to: this.address, data: callData }),
+      blockNumber: LAST_FINALIZED_BLOCK_NUMBER
+    }).result();
+    return decodeFunctionResult({
+      abi: CommitOrBurnABI,
+      functionName: "supportsInterface",
+      data: bytesToHex3(result.data)
+    });
+  }
   writeReportFromDeposit(runtime, githubId, gasConfig) {
     const callData = encodeFunctionData({
       abi: CommitOrBurnABI,
       functionName: "deposit",
       args: [githubId]
+    });
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  writeReportFromOnReport(runtime, metadata, report, gasConfig) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "onReport",
+      args: [metadata, report]
+    });
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  writeReportFromSetExpectedAuthor(runtime, author, gasConfig) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "setExpectedAuthor",
+      args: [author]
+    });
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  writeReportFromSetExpectedWorkflowId(runtime, id, gasConfig) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "setExpectedWorkflowId",
+      args: [id]
+    });
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  writeReportFromSetExpectedWorkflowName(runtime, name, gasConfig) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "setExpectedWorkflowName",
+      args: [name]
+    });
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  writeReportFromSetForwarderAddress(runtime, forwarder, gasConfig) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "setForwarderAddress",
+      args: [forwarder]
+    });
+    const reportResponse = runtime.report(prepareReportRequest(callData)).result();
+    return this.client.writeReport(runtime, {
+      receiver: this.address,
+      report: reportResponse,
+      gasConfig
+    }).result();
+  }
+  writeReportFromTransferOwnership(runtime, newOwner, gasConfig) {
+    const callData = encodeFunctionData({
+      abi: CommitOrBurnABI,
+      functionName: "transferOwnership",
+      args: [newOwner]
     });
     const reportResponse = runtime.report(prepareReportRequest(callData)).result();
     return this.client.writeReport(runtime, {
@@ -21260,6 +21945,348 @@ class CommitOrBurn {
     const { data: _, ...rest } = log;
     return { ...rest, data: decoded.args };
   }
+  logTriggerExpectedAuthorUpdated(filters) {
+    let topics;
+    if (!filters || filters.length === 0) {
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ExpectedAuthorUpdated"
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else if (filters.length === 1) {
+      const f = filters[0];
+      const args = {
+        previousAuthor: f.previousAuthor,
+        newAuthor: f.newAuthor
+      };
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ExpectedAuthorUpdated",
+        args
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else {
+      const allEncoded = filters.map((f) => {
+        const args = {
+          previousAuthor: f.previousAuthor,
+          newAuthor: f.newAuthor
+        };
+        return encodeEventTopics({
+          abi: CommitOrBurnABI,
+          eventName: "ExpectedAuthorUpdated",
+          args
+        });
+      });
+      topics = allEncoded[0].map((_, i) => ({
+        values: [...new Set(allEncoded.flatMap((row) => encodeTopicValue(row[i])))]
+      }));
+    }
+    const baseTrigger = this.client.logTrigger({
+      addresses: [hexToBase64(this.address)],
+      topics
+    });
+    const contract = this;
+    return {
+      capabilityId: () => baseTrigger.capabilityId(),
+      method: () => baseTrigger.method(),
+      outputSchema: () => baseTrigger.outputSchema(),
+      configAsAny: () => baseTrigger.configAsAny(),
+      adapt: (rawOutput) => contract.decodeExpectedAuthorUpdated(rawOutput)
+    };
+  }
+  decodeExpectedAuthorUpdated(log) {
+    const decoded = decodeEventLog({
+      abi: CommitOrBurnABI,
+      data: bytesToHex3(log.data),
+      topics: log.topics.map((t) => bytesToHex3(t))
+    });
+    const { data: _, ...rest } = log;
+    return { ...rest, data: decoded.args };
+  }
+  logTriggerExpectedWorkflowIdUpdated(filters) {
+    let topics;
+    if (!filters || filters.length === 0) {
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ExpectedWorkflowIdUpdated"
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else if (filters.length === 1) {
+      const f = filters[0];
+      const args = {
+        previousId: f.previousId,
+        newId: f.newId
+      };
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ExpectedWorkflowIdUpdated",
+        args
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else {
+      const allEncoded = filters.map((f) => {
+        const args = {
+          previousId: f.previousId,
+          newId: f.newId
+        };
+        return encodeEventTopics({
+          abi: CommitOrBurnABI,
+          eventName: "ExpectedWorkflowIdUpdated",
+          args
+        });
+      });
+      topics = allEncoded[0].map((_, i) => ({
+        values: [...new Set(allEncoded.flatMap((row) => encodeTopicValue(row[i])))]
+      }));
+    }
+    const baseTrigger = this.client.logTrigger({
+      addresses: [hexToBase64(this.address)],
+      topics
+    });
+    const contract = this;
+    return {
+      capabilityId: () => baseTrigger.capabilityId(),
+      method: () => baseTrigger.method(),
+      outputSchema: () => baseTrigger.outputSchema(),
+      configAsAny: () => baseTrigger.configAsAny(),
+      adapt: (rawOutput) => contract.decodeExpectedWorkflowIdUpdated(rawOutput)
+    };
+  }
+  decodeExpectedWorkflowIdUpdated(log) {
+    const decoded = decodeEventLog({
+      abi: CommitOrBurnABI,
+      data: bytesToHex3(log.data),
+      topics: log.topics.map((t) => bytesToHex3(t))
+    });
+    const { data: _, ...rest } = log;
+    return { ...rest, data: decoded.args };
+  }
+  logTriggerExpectedWorkflowNameUpdated(filters) {
+    let topics;
+    if (!filters || filters.length === 0) {
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ExpectedWorkflowNameUpdated"
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else if (filters.length === 1) {
+      const f = filters[0];
+      const args = {
+        previousName: f.previousName,
+        newName: f.newName
+      };
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ExpectedWorkflowNameUpdated",
+        args
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else {
+      const allEncoded = filters.map((f) => {
+        const args = {
+          previousName: f.previousName,
+          newName: f.newName
+        };
+        return encodeEventTopics({
+          abi: CommitOrBurnABI,
+          eventName: "ExpectedWorkflowNameUpdated",
+          args
+        });
+      });
+      topics = allEncoded[0].map((_, i) => ({
+        values: [...new Set(allEncoded.flatMap((row) => encodeTopicValue(row[i])))]
+      }));
+    }
+    const baseTrigger = this.client.logTrigger({
+      addresses: [hexToBase64(this.address)],
+      topics
+    });
+    const contract = this;
+    return {
+      capabilityId: () => baseTrigger.capabilityId(),
+      method: () => baseTrigger.method(),
+      outputSchema: () => baseTrigger.outputSchema(),
+      configAsAny: () => baseTrigger.configAsAny(),
+      adapt: (rawOutput) => contract.decodeExpectedWorkflowNameUpdated(rawOutput)
+    };
+  }
+  decodeExpectedWorkflowNameUpdated(log) {
+    const decoded = decodeEventLog({
+      abi: CommitOrBurnABI,
+      data: bytesToHex3(log.data),
+      topics: log.topics.map((t) => bytesToHex3(t))
+    });
+    const { data: _, ...rest } = log;
+    return { ...rest, data: decoded.args };
+  }
+  logTriggerForwarderAddressUpdated(filters) {
+    let topics;
+    if (!filters || filters.length === 0) {
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ForwarderAddressUpdated"
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else if (filters.length === 1) {
+      const f = filters[0];
+      const args = {
+        previousForwarder: f.previousForwarder,
+        newForwarder: f.newForwarder
+      };
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "ForwarderAddressUpdated",
+        args
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else {
+      const allEncoded = filters.map((f) => {
+        const args = {
+          previousForwarder: f.previousForwarder,
+          newForwarder: f.newForwarder
+        };
+        return encodeEventTopics({
+          abi: CommitOrBurnABI,
+          eventName: "ForwarderAddressUpdated",
+          args
+        });
+      });
+      topics = allEncoded[0].map((_, i) => ({
+        values: [...new Set(allEncoded.flatMap((row) => encodeTopicValue(row[i])))]
+      }));
+    }
+    const baseTrigger = this.client.logTrigger({
+      addresses: [hexToBase64(this.address)],
+      topics
+    });
+    const contract = this;
+    return {
+      capabilityId: () => baseTrigger.capabilityId(),
+      method: () => baseTrigger.method(),
+      outputSchema: () => baseTrigger.outputSchema(),
+      configAsAny: () => baseTrigger.configAsAny(),
+      adapt: (rawOutput) => contract.decodeForwarderAddressUpdated(rawOutput)
+    };
+  }
+  decodeForwarderAddressUpdated(log) {
+    const decoded = decodeEventLog({
+      abi: CommitOrBurnABI,
+      data: bytesToHex3(log.data),
+      topics: log.topics.map((t) => bytesToHex3(t))
+    });
+    const { data: _, ...rest } = log;
+    return { ...rest, data: decoded.args };
+  }
+  logTriggerOwnershipTransferred(filters) {
+    let topics;
+    if (!filters || filters.length === 0) {
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "OwnershipTransferred"
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else if (filters.length === 1) {
+      const f = filters[0];
+      const args = {
+        previousOwner: f.previousOwner,
+        newOwner: f.newOwner
+      };
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "OwnershipTransferred",
+        args
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else {
+      const allEncoded = filters.map((f) => {
+        const args = {
+          previousOwner: f.previousOwner,
+          newOwner: f.newOwner
+        };
+        return encodeEventTopics({
+          abi: CommitOrBurnABI,
+          eventName: "OwnershipTransferred",
+          args
+        });
+      });
+      topics = allEncoded[0].map((_, i) => ({
+        values: [...new Set(allEncoded.flatMap((row) => encodeTopicValue(row[i])))]
+      }));
+    }
+    const baseTrigger = this.client.logTrigger({
+      addresses: [hexToBase64(this.address)],
+      topics
+    });
+    const contract = this;
+    return {
+      capabilityId: () => baseTrigger.capabilityId(),
+      method: () => baseTrigger.method(),
+      outputSchema: () => baseTrigger.outputSchema(),
+      configAsAny: () => baseTrigger.configAsAny(),
+      adapt: (rawOutput) => contract.decodeOwnershipTransferred(rawOutput)
+    };
+  }
+  decodeOwnershipTransferred(log) {
+    const decoded = decodeEventLog({
+      abi: CommitOrBurnABI,
+      data: bytesToHex3(log.data),
+      topics: log.topics.map((t) => bytesToHex3(t))
+    });
+    const { data: _, ...rest } = log;
+    return { ...rest, data: decoded.args };
+  }
+  logTriggerSecurityWarning(filters) {
+    let topics;
+    if (!filters || filters.length === 0) {
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "SecurityWarning"
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else if (filters.length === 1) {
+      const f = filters[0];
+      const args = {};
+      const encoded = encodeEventTopics({
+        abi: CommitOrBurnABI,
+        eventName: "SecurityWarning",
+        args
+      });
+      topics = encoded.map((t) => ({ values: encodeTopicValue(t) }));
+    } else {
+      const allEncoded = filters.map((f) => {
+        const args = {};
+        return encodeEventTopics({
+          abi: CommitOrBurnABI,
+          eventName: "SecurityWarning",
+          args
+        });
+      });
+      topics = allEncoded[0].map((_, i) => ({
+        values: [...new Set(allEncoded.flatMap((row) => encodeTopicValue(row[i])))]
+      }));
+    }
+    const baseTrigger = this.client.logTrigger({
+      addresses: [hexToBase64(this.address)],
+      topics
+    });
+    const contract = this;
+    return {
+      capabilityId: () => baseTrigger.capabilityId(),
+      method: () => baseTrigger.method(),
+      outputSchema: () => baseTrigger.outputSchema(),
+      configAsAny: () => baseTrigger.configAsAny(),
+      adapt: (rawOutput) => contract.decodeSecurityWarning(rawOutput)
+    };
+  }
+  decodeSecurityWarning(log) {
+    const decoded = decodeEventLog({
+      abi: CommitOrBurnABI,
+      data: bytesToHex3(log.data),
+      topics: log.topics.map((t) => bytesToHex3(t))
+    });
+    const { data: _, ...rest } = log;
+    return { ...rest, data: decoded.args };
+  }
 }
 function fetchCommitsForUser(sendRequester, githubId, token, now) {
   const utcMidnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
@@ -21295,6 +22322,7 @@ function fetchCommitsForUser(sendRequester, githubId, token, now) {
   return data.data.user.contributionsCollection?.totalCommitContributions ?? 0;
 }
 var onCronTrigger = (runtime) => {
+  const commitResults = [];
   const network = getNetwork({
     chainFamily: "evm",
     chainSelectorName: runtime.config.chainSelectorName
@@ -21303,20 +22331,45 @@ var onCronTrigger = (runtime) => {
     throw new Error("Network not found");
   const now = runtime.now();
   const client = new ClientCapability(network.chainSelector.selector);
-  const contract = new CommitOrBurn(client, runtime.config.contractAddress);
+  const contractAddress = runtime.getSecret({ id: "CRE_CONTRACT_ADDRESS" }).result().value;
+  const contract = new CommitOrBurn(client, contractAddress);
   const currentRoundId = contract.sCurrentRound(runtime);
   const roundInfo = contract.getRoundInfo(runtime, currentRoundId);
-  runtime.log(`${now.getTime() / 1000 >= Number(roundInfo.startTime)}`);
-  if (now.getTime() / 1000 <= Number(roundInfo.startTime)) {
-    runtime.log(`Round ${currentRoundId} is not in registration period. Skipping.`);
-    return "Skipped: not in registration period";
-  }
-  const githubIds = contract.getUsersByRound(runtime, currentRoundId);
+  const githubIds = contract.getUsersGithubIdByRound(runtime, currentRoundId);
   const token = runtime.getSecret({ id: "GITHUB_TOKEN" }).result().value;
   const httpClient = new ClientCapability2;
   for (const githubId of githubIds) {
     const commits = httpClient.sendRequest(runtime, fetchCommitsForUser, consensusMedianAggregation())(githubId, token, now).result();
-    runtime.log(`${githubId}, ${JSON.stringify(commits)}`);
+    let success = false;
+    if (commits !== 0) {
+      success = true;
+    }
+    const reulst = {
+      githubId,
+      success
+    };
+    commitResults.push(reulst);
+    runtime.log(`${reulst.githubId}, ${reulst.success}`);
+  }
+  const reportData = encodeAbiParameters(parseAbiParameters("(string githubId, bool success)[] results"), [commitResults]);
+  const reportResponse = runtime.report({
+    encodedPayload: hexToBase64(reportData),
+    encoderName: "evm",
+    signingAlgo: "ecdsa",
+    hashingAlgo: "keccak256"
+  }).result();
+  const writeResult = client.writeReport(runtime, {
+    receiver: contractAddress,
+    report: reportResponse,
+    gasConfig: {
+      gasLimit: "500000"
+    }
+  }).result();
+  if (writeResult.txStatus === TxStatus.SUCCESS) {
+    const txHash = bytesToHex3(writeResult.txHash || new Uint8Array(32));
+    runtime.log(`Transaction successful: ${txHash}`);
+  } else {
+    throw new Error(`Transaction failed: ${writeResult.txStatus}`);
   }
   return `Checked ${githubIds.length} users`;
 };
