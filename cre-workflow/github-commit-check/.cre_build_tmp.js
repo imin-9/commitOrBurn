@@ -22288,6 +22288,19 @@ class CommitOrBurn {
     return { ...rest, data: decoded.args };
   }
 }
+function initClients(runtime, contractAddress) {
+  const network = getNetwork({
+    chainFamily: "evm",
+    chainSelectorName: runtime.config.chainSelectorName,
+    isTestnet: true
+  });
+  if (!network)
+    throw new Error("Network not found");
+  const evmClient = new ClientCapability(network.chainSelector.selector);
+  const httpClient = new ClientCapability2;
+  const contract = new CommitOrBurn(evmClient, contractAddress);
+  return { evmClient, httpClient, contract };
+}
 function fetchCommitsForUser(sendRequester, githubId, token, now) {
   const utcMidnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
   const yesterdayMidnight = new Date(utcMidnight.getTime() - 24 * 60 * 60 * 1000);
@@ -22321,23 +22334,25 @@ function fetchCommitsForUser(sendRequester, githubId, token, now) {
     return 0;
   return data.data.user.contributionsCollection?.totalCommitContributions ?? 0;
 }
-var onCronTrigger = (runtime) => {
-  const commitResults = [];
-  const network = getNetwork({
-    chainFamily: "evm",
-    chainSelectorName: runtime.config.chainSelectorName
-  });
-  if (!network)
-    throw new Error("Network not found");
+function runDailyCommitsChek(runtime, client, contractAddress, token) {
+  const evmClient = client.evmClient;
+  const httpClient = client.httpClient;
+  const contract = client.contract;
   const now = runtime.now();
-  const client = new ClientCapability(network.chainSelector.selector);
-  const contractAddress = runtime.getSecret({ id: "CRE_CONTRACT_ADDRESS" }).result().value;
-  const contract = new CommitOrBurn(client, contractAddress);
   const currentRoundId = contract.sCurrentRound(runtime);
-  const roundInfo = contract.getRoundInfo(runtime, currentRoundId);
+  if (!isRoundActive(runtime, contract, currentRoundId, now)) {
+    return false;
+  }
   const githubIds = contract.getUsersGithubIdByRound(runtime, currentRoundId);
-  const token = runtime.getSecret({ id: "GITHUB_TOKEN" }).result().value;
-  const httpClient = new ClientCapability2;
+  const commitResults = getCommitsResults(runtime, httpClient, githubIds, token, now);
+  return sendReport2(runtime, evmClient, contractAddress, commitResults);
+}
+function isRoundActive(runtime, contract, currentRoundId, now) {
+  const roundInfo = contract.getRoundInfo(runtime, currentRoundId);
+  return true;
+}
+function getCommitsResults(runtime, httpClient, githubIds, token, now) {
+  const commitResults = [];
   for (const githubId of githubIds) {
     const commits = httpClient.sendRequest(runtime, fetchCommitsForUser, consensusMedianAggregation())(githubId, token, now).result();
     let success = false;
@@ -22351,6 +22366,9 @@ var onCronTrigger = (runtime) => {
     commitResults.push(reulst);
     runtime.log(`${reulst.githubId}, ${reulst.success}`);
   }
+  return commitResults;
+}
+function sendReport2(runtime, evmClient, contractAddress, commitResults) {
   const reportData = encodeAbiParameters(parseAbiParameters("(string githubId, bool success)[] results"), [commitResults]);
   const reportResponse = runtime.report({
     encodedPayload: hexToBase64(reportData),
@@ -22358,7 +22376,7 @@ var onCronTrigger = (runtime) => {
     signingAlgo: "ecdsa",
     hashingAlgo: "keccak256"
   }).result();
-  const writeResult = client.writeReport(runtime, {
+  const writeResult = evmClient.writeReport(runtime, {
     receiver: contractAddress,
     report: reportResponse,
     gasConfig: {
@@ -22371,7 +22389,13 @@ var onCronTrigger = (runtime) => {
   } else {
     throw new Error(`Transaction failed: ${writeResult.txStatus}`);
   }
-  return `Checked ${githubIds.length} users`;
+  return true;
+}
+var onCronTrigger = (runtime) => {
+  const contractAddress = runtime.getSecret({ id: "CRE_CONTRACT_ADDRESS" }).result().value;
+  const token = runtime.getSecret({ id: "GITHUB_TOKEN" }).result().value;
+  const clients = initClients(runtime, contractAddress);
+  return runDailyCommitsChek(runtime, clients, contractAddress, token);
 };
 var initWorkflow = (config) => {
   const cron = new CronCapability;
